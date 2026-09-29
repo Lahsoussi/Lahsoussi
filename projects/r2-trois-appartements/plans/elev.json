@@ -1,0 +1,146 @@
+{
+ "title": "Façade sur rue",
+ "width": 10,
+ "street_label": "RUE",
+ "levels": [
+  {
+   "name": "RDC",
+   "h": 3.2,
+   "note": "Apt 1 · cour"
+  },
+  {
+   "name": "1er",
+   "h": 3.0,
+   "note": "Apt 2"
+  },
+  {
+   "name": "2e",
+   "h": 3.0,
+   "note": "Apt 3 · terrasse"
+  }
+ ],
+ "parapet": 1.1,
+ "bulkhead": {
+  "x": 0,
+  "w": 2.4,
+  "h": 2.3
+ },
+ "plinth": 0.6,
+ "bands": [
+  {
+   "x": 2.2,
+   "z": 0.6,
+   "w": 0.2,
+   "h": 8.6,
+   "cls": "band"
+  },
+  {
+   "x": 9.0,
+   "z": 0.6,
+   "w": 0.2,
+   "h": 8.6,
+   "cls": "band"
+  }
+ ],
+ "bays": [
+  {
+   "level": 0,
+   "kind": "door",
+   "x": 1.2,
+   "w": 1.2,
+   "h": 2.6
+  },
+  {
+   "level": 0,
+   "kind": "window",
+   "x": 3.0,
+   "w": 3.0,
+   "h": 1.6,
+   "sill": 1.0,
+   "panes": 3
+  },
+  {
+   "level": 0,
+   "kind": "window",
+   "x": 7.2,
+   "w": 2.0,
+   "h": 1.6,
+   "sill": 1.0,
+   "panes": 2
+  },
+  {
+   "level": 0,
+   "kind": "screen",
+   "x": 0.5,
+   "w": 0.7,
+   "h": 1.2,
+   "sill": 1.6
+  },
+  {
+   "level": 1,
+   "kind": "balcony",
+   "x": 2.4,
+   "w": 6.6,
+   "screen": true
+  },
+  {
+   "level": 1,
+   "kind": "glazing",
+   "x": 3.0,
+   "w": 3.0,
+   "h": 2.3,
+   "sill": 0.1,
+   "panes": 3
+  },
+  {
+   "level": 1,
+   "kind": "window",
+   "x": 7.2,
+   "w": 2.0,
+   "h": 1.6,
+   "sill": 1.0,
+   "panes": 2
+  },
+  {
+   "level": 1,
+   "kind": "screen",
+   "x": 0.6,
+   "w": 1.2,
+   "h": 1.6,
+   "sill": 1.0
+  },
+  {
+   "level": 2,
+   "kind": "balcony",
+   "x": 2.4,
+   "w": 6.6,
+   "screen": true
+  },
+  {
+   "level": 2,
+   "kind": "glazing",
+   "x": 3.0,
+   "w": 3.0,
+   "h": 2.3,
+   "sill": 0.1,
+   "panes": 3
+  },
+  {
+   "level": 2,
+   "kind": "window",
+   "x": 7.2,
+   "w": 2.0,
+   "h": 1.6,
+   "sill": 1.0,
+   "panes": 2
+  },
+  {
+   "level": 2,
+   "kind": "screen",
+   "x": 0.6,
+   "w": 1.2,
+   "h": 1.6,
+   "sill": 1.0
+  }
+ ]
+}

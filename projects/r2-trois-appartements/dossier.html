@@ -1,0 +1,1663 @@
+<title>Trois Appartements R+2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single-column architect's dossier, 1040px wide, plans drawn full-bleed inside the column,
+   sticky section rail on top. Plaster ground, Fès-blue ink accent, brass only for numbers that matter. */
+:root {
+  --bg: #ECE8E1;          /* limewash plaster */
+  --panel: #F8F6F1;       /* paper */
+  --panel-2: #E3DED4;     /* deeper plaster */
+  --fg: #1B232D;          /* blue-black ink */
+  --muted: #5B6470;
+  --line: #D3CCC1;
+  --accent: #1E4C9A;      /* bleu de Fès */
+  --accent-soft: #D9E3F5;
+  --brass: #9C7A34;
+  --ok: #2F6B45; --warn: #9A5B1E;
+  --pl-salon: #EAD8BF; --pl-bed: #D9E2EE; --pl-kitchen: #F0E0CD; --pl-wet: #D4E4E7;
+  --pl-hall: #F1ECE3; --pl-stair: #DFD9CF; --pl-patio: #DBE7D4; --pl-balcony: #F4EFE6;
+  --pl-ink: #1B232D; --pl-ink-2: #6B655C; --pl-paper: #FBFAF7; --pl-glass: #C9DAE4; --pl-wood: #5A4634;
+  --display: 'Marcellus', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  --radius: 4px;
+  --shadow: 0 1px 0 rgba(27,35,45,.06), 0 8px 24px -16px rgba(27,35,45,.25);
+  --plot-w: 1040px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141A21; --panel: #1B232C; --panel-2: #222C37; --fg: #E8E3D9; --muted: #A4AAB4; --line: #2F3A47;
+    --accent: #85A9EA; --accent-soft: #24354F; --brass: #D6B26B; --ok: #7FC09A; --warn: #E0A265;
+    --pl-salon: #4B3C2C; --pl-bed: #2C3B50; --pl-kitchen: #4A3B2B; --pl-wet: #244047; --pl-hall: #252D36;
+    --pl-stair: #2B333C; --pl-patio: #263B2B; --pl-balcony: #212932; --pl-ink: #E8E3D9; --pl-ink-2: #AEB4BD;
+    --pl-paper: #171E26; --pl-glass: #3C566A; --pl-wood: #8A6A4E;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141A21; --panel: #1B232C; --panel-2: #222C37; --fg: #E8E3D9; --muted: #A4AAB4; --line: #2F3A47;
+  --accent: #85A9EA; --accent-soft: #24354F; --brass: #D6B26B; --ok: #7FC09A; --warn: #E0A265;
+  --pl-salon: #4B3C2C; --pl-bed: #2C3B50; --pl-kitchen: #4A3B2B; --pl-wet: #244047; --pl-hall: #252D36;
+  --pl-stair: #2B333C; --pl-patio: #263B2B; --pl-balcony: #212932; --pl-ink: #E8E3D9; --pl-ink-2: #AEB4BD;
+  --pl-paper: #171E26; --pl-glass: #3C566A; --pl-wood: #8A6A4E;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+.wrap { max-width: var(--plot-w); margin: 0 auto; padding-inline: 20px; padding-block: 0 96px; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 400; letter-spacing: .005em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); line-height: 1.05; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); line-height: 1.12; }
+h3 { font-size: 1.25rem; line-height: 1.25; }
+h4 { font-size: 1.05rem; font-family: var(--body); font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+p + p { margin-top: .8em; }
+a { color: var(--accent); text-underline-offset: 3px; }
+strong { font-weight: 600; }
+small, .small { font-size: .875rem; }
+.eyebrow { font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.brass { color: var(--brass); }
+
+/* header */
+.masthead { padding-block: 40px 28px; border-bottom: 1px solid var(--line); display: grid; gap: 22px; }
+.masthead .lede { font-size: 1.12rem; max-width: 62ch; color: var(--fg); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0; border: 1px solid var(--line); background: var(--panel); }
+.fact { padding: 14px 16px; border-right: 1px solid var(--line); min-width: 0; }
+.fact:last-child { border-right: 0; }
+.fact .v { font-family: var(--display); font-size: 1.7rem; line-height: 1.1; color: var(--fg); }
+.fact .v small { font-family: var(--body); font-size: .8rem; color: var(--muted); margin-left: 3px; }
+.fact .k { font-size: .78rem; color: var(--muted); margin-top: 3px; }
+@media (max-width: 720px) { .fact { border-right: 0; border-bottom: 1px solid var(--line);} .fact:last-child { border-bottom: 0; } }
+
+/* rail nav */
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin-inline: -20px; padding-inline: 20px; }
+.rail ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.rail ul::-webkit-scrollbar { display: none; }
+.rail a { display: block; padding: 12px 10px; font-size: .84rem; color: var(--muted); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; }
+.rail a:hover, .rail a:focus-visible { color: var(--fg); outline: none; border-bottom-color: var(--line); }
+.rail a[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* sections */
+section.s { padding-block: 56px 8px; scroll-margin-top: 64px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 26px; max-width: 70ch; }
+.sec-head p { color: var(--muted); font-size: 1.02rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px; }
+.card { background: var(--panel); border: 1px solid var(--line); padding: 18px 20px; min-width: 0; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 1.15rem; }
+.card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 5px; }
+.card li::marker { color: var(--brass); }
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 14px 18px; display: grid; gap: 6px; }
+.callout.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--panel)); }
+.callout p { max-width: 80ch; }
+
+/* figures */
+figure { margin: 0; }
+.fig { background: var(--pl-paper); border: 1px solid var(--line); padding: 14px 10px 8px; display: grid; gap: 6px; box-shadow: var(--shadow); }
+.fig .draw { overflow-x: auto; }
+.fig svg { width: 100%; height: auto; display: block; max-width: 100%; }
+@media (max-width: 600px) { .fig .draw svg { min-width: 560px; max-width: none; } .fig .draw::after { content: 'faites défiler pour voir tout le plan'; display: block; font-size: .74rem; color: var(--muted); padding: 4px 8px 0; } }
+.fig figcaption { padding: 6px 8px 4px; font-size: .86rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+.fig figcaption b { color: var(--fg); font-weight: 600; }
+.fig-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px; }
+
+/* plan drawing classes (SVG) */
+.plan, .elev { font-family: var(--body); }
+.plan .plot { fill: var(--pl-paper); }
+.plan .room { stroke: none; }
+.plan .wall { fill: none; stroke: var(--pl-ink); stroke-width: 5; }
+.plan .wall-outer { fill: none; stroke: var(--pl-ink); stroke-width: 9; }
+.plan .balc { fill: var(--pl-balcony); stroke: var(--pl-ink); stroke-width: 1.4; }
+.plan .gap { fill: var(--pl-paper); }
+.plan .leaf { stroke: var(--pl-ink); stroke-width: 1.6; }
+.plan .arc { fill: none; stroke: var(--pl-ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.plan .win { stroke: var(--pl-ink); stroke-width: 1; }
+.plan .wall-thin { stroke: var(--pl-ink); stroke-width: 1.5; }
+.plan .fn { fill: none; stroke: var(--pl-ink-2); stroke-width: 1.2; }
+.plan .fn-thin { fill: none; stroke: var(--pl-ink-2); stroke-width: .8; }
+.plan .fn-plant { fill: var(--pl-patio); stroke: var(--pl-ink-2); stroke-width: 1; }
+.plan .fn-text { font-size: 9px; fill: var(--pl-ink-2); }
+.plan .st { stroke: var(--pl-ink-2); stroke-width: 1; }
+.plan .st-core { fill: var(--pl-ink); }
+.plan .st-arrow { fill: none; stroke: var(--brass); stroke-width: 1.6; }
+.plan .st-dot, .plan .st-head { fill: var(--brass); }
+.plan .lbl { font-size: 12.5px; font-weight: 600; fill: var(--pl-ink); }
+.plan .lbl-a { font-size: 11px; fill: var(--pl-ink-2); font-family: var(--mono); }
+.plan .lbl-s { font-size: 9.5px; font-weight: 600; fill: var(--pl-ink); }
+.plan .lbl-s-a { font-size: 9px; fill: var(--pl-ink-2); font-family: var(--mono); }
+.plan .dim, .plan .dim2 { stroke: var(--pl-ink-2); stroke-width: .9; }
+.plan .dim-t { font-size: 10.5px; fill: var(--pl-ink-2); font-family: var(--mono); }
+.plan .street { font-size: 11px; letter-spacing: .16em; fill: var(--pl-ink-2); }
+.plan .party { font-size: 8.5px; letter-spacing: .12em; fill: var(--pl-ink-2); }
+.plan .hatch { stroke: var(--pl-ink-2); stroke-width: .7; opacity: .55; }
+.plan .note { font-size: 10px; fill: var(--pl-ink-2); }
+/* elevation classes */
+.elev .ground { stroke: var(--pl-ink); stroke-width: 2; }
+.elev .neigh { fill: var(--pl-stair); }
+.elev .body { fill: var(--pl-hall); stroke: var(--pl-ink); stroke-width: 2; }
+.elev .plinth { fill: var(--pl-stair); }
+.elev .band { fill: var(--pl-salon); }
+.elev .joint { stroke: var(--pl-ink-2); stroke-width: .8; stroke-dasharray: 4 3; opacity: .7; }
+.elev .edge { stroke: var(--pl-ink); stroke-width: 1.5; }
+.elev .slab { fill: var(--pl-ink); }
+.elev .claustra { fill: var(--pl-salon); stroke: var(--pl-ink); stroke-width: 1; }
+.elev .perf { fill: var(--pl-hall); stroke: var(--pl-ink-2); stroke-width: .5; }
+.elev .bar { stroke: var(--pl-ink-2); stroke-width: 1; }
+.elev .handrail { stroke: var(--pl-ink); stroke-width: 2; }
+.elev .door { fill: var(--pl-wood); stroke: var(--pl-ink); stroke-width: 1; }
+.elev .slat { stroke: var(--pl-paper); stroke-width: .8; opacity: .5; }
+.elev .frame { fill: var(--pl-ink); }
+.elev .glass { fill: var(--pl-glass); }
+.elev .mullion { stroke: var(--pl-ink); stroke-width: 1.5; }
+.elev .archline { fill: none; stroke: var(--pl-ink); stroke-width: 1; }
+.elev .lvl { font-size: 11px; font-weight: 600; fill: var(--pl-ink); }
+.elev .lvl-a { font-size: 10px; fill: var(--pl-ink-2); }
+.elev .dim { stroke: var(--pl-ink-2); stroke-width: .9; }
+.elev .dim-t { font-size: 10px; fill: var(--pl-ink-2); font-family: var(--mono); }
+.elev .street { font-size: 11px; letter-spacing: .16em; fill: var(--pl-ink-2); }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel-2); }
+tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tfoot td { font-weight: 600; background: var(--panel-2); }
+
+/* legend swatches */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .82rem; color: var(--muted); padding: 4px 8px 0; }
+.legend i { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line); vertical-align: -1px; margin-right: 6px; }
+
+/* materials board */
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+.swatch { border: 1px solid var(--line); background: var(--panel); display: grid; }
+.swatch .chip { height: 74px; border-bottom: 1px solid var(--line); }
+.swatch .t { padding: 10px 12px; display: grid; gap: 2px; }
+.swatch .t b { font-weight: 600; font-size: .9rem; }
+.swatch .t span { font-size: .78rem; color: var(--muted); }
+
+/* timeline */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: st; border-left: 1px solid var(--line); }
+.steps li { position: relative; padding: 14px 0 18px 26px; display: grid; gap: 4px; }
+.steps li::before { counter-increment: st; content: counter(st); position: absolute; left: -13px; top: 14px; width: 25px; height: 25px; border-radius: 50%;
+  background: var(--panel); border: 1px solid var(--accent); color: var(--accent); font-family: var(--mono); font-size: .72rem; display: grid; place-items: center; }
+.steps li b { font-weight: 600; }
+.steps li .when { font-family: var(--mono); font-size: .74rem; color: var(--brass); letter-spacing: .06em; text-transform: uppercase; }
+
+/* checklist */
+.check { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.check li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+.check li::before { content: ""; width: 14px; height: 14px; margin-top: 5px; border: 1.5px solid var(--accent); border-radius: 2px; }
+
+/* listing copy */
+.copybox { background: var(--panel); border: 1px solid var(--line); padding: 16px 18px; font-size: .95rem; white-space: pre-wrap; font-family: var(--body); position: relative; }
+.copybox button { position: absolute; top: 10px; right: 10px; font: 500 .76rem var(--body); color: var(--accent); background: var(--panel-2); border: 1px solid var(--line); padding: 5px 9px; cursor: pointer; }
+.copybox button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* pricing scenario */
+.scen { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; }
+.scen .card .big { font-family: var(--display); font-size: 1.6rem; }
+kbd.tag { font: 500 .72rem var(--mono); background: var(--panel-2); border: 1px solid var(--line); padding: 2px 6px; color: var(--muted); }
+.foot { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--muted); display: grid; gap: 6px; }
+.sources { font-size: .82rem; color: var(--muted); display: grid; gap: 4px; padding-left: 1.1em; margin: 0; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <span class="eyebrow">Dossier de conception · R+2 · 3 appartements · lot de 100 m²</span>
+  <h1>Three apartments on a hundred square metres, drawn to sell</h1>
+  <p class="lede">A small building for a 10 × 10 m Moroccan lot: one three-bedroom apartment per level, a salon marocain on the street, every room lit from the façade or a 16 m² courtyard, a shared stair to a roof terrace. Below are the plans, the finishes, the budget, the legal path to three separate titles, and the plan to sell all three in one season.</p>
+  <div class="facts">
+    <div class="fact"><div class="v">10 × 10<small>m</small></div><div class="k">Lot, one street façade, three party walls</div></div>
+    <div class="fact"><div class="v">R+2</div><div class="k">Ground + 2 floors, 9.2 m to the terrace slab, 11.5 m overall</div></div>
+    <div class="fact"><div class="v" id="fact-net">60<small>m²</small></div><div class="k">Net habitable area per apartment</div></div>
+    <div class="fact"><div class="v">3 + 1</div><div class="k">Bedrooms + salon marocain per apartment</div></div>
+    <div class="fact"><div class="v">16<small>m²</small></div><div class="k">Courtyard open to the sky, 4 m clear side</div></div>
+    <div class="fact"><div class="v">≤ 700 k</div><div class="k">MAD TTC price point that unlocks 70 000 MAD state aid</div></div>
+  </div>
+</header>
+<nav class="rail" aria-label="Sections">
+  <ul>
+    <li><a href="#rules">Site and rules</a></li>
+    <li><a href="#market">Buyers</a></li>
+    <li><a href="#plans">Plans</a></li>
+    <li><a href="#interior">Finishes</a></li>
+    <li><a href="#budget">Budget</a></li>
+    <li><a href="#process">Legal path</a></li>
+    <li><a href="#sales">Selling</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ul>
+</nav>
+
+<section class="s" id="rules">
+  <div class="sec-head">
+    <span class="eyebrow">01 · Site and rules</span>
+    <h2>What a 100 m² lot lets you build</h2>
+    <p>The plan below assumes a 10 × 10 m lot with one street façade and party walls on the other three sides, in a zone classed for R+2 buildings on a courtyard (the "E2 / habitat économique" type found in most lotissements). Before buying or drawing anything, ask the Agence Urbaine for the <em>note de renseignements urbanistiques</em> of the exact parcel and read the lotissement's <em>cahier des charges</em>. These two documents override every figure on this page.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Height and levels</h3>
+      <ul>
+        <li>R+2 is capped at 11.50 m in most communal règlements (some allow 12 m), superstructures included.</li>
+        <li>Ground floor at 3.20 m and upper floors at 3.00 m floor-to-floor give a 2.80 m clear ceiling, the legal minimum inland (2.60 m within 25 km of the coast), and keep the first balcony at least 3.00 m above the sidewalk.</li>
+        <li>Roof: terrace slab at 9.20 m, parapet 1.10–1.20 m, stair bulkhead of at most 2.30 m set back 3 m from the façade, so the whole building stays under the 11.50 m "petit projet" line.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The courtyard rule</h3>
+      <ul>
+        <li>Built footprint is capped around 84% of the lot. The remaining 16 m² must be an open-air courtyard through all levels.</li>
+        <li>The courtyard needs a clear side of at least 4.0 m ("vue directe") when bedrooms or the kitchen take their light from it.</li>
+        <li>Every habitable room must open on the street or on that courtyard. Party walls stay blind. A small courette may only serve bathrooms.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Rooms and stairs</h3>
+      <ul>
+        <li>Minimums by decree: main room 12 m², other bedrooms 9 m², kitchen 5 m², bathroom 1.30 m², room width 2.35 m, windows ≥ 1/10 of the floor area.</li>
+        <li>Shared stair: flights at least 1.00 m clear (Casablanca applies this to every main stair), 17 risers of 17.6 cm per level.</li>
+        <li>Balconies over the street only where the street is at least 10–12 m wide, with a projection capped at about 1/10 of its width.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout warn" style="margin-top:20px">
+    <b>Two things to verify before the architect starts</b>
+    <p>Whether the commune waives the on-plot parking space for lots under 160 m² (most do inside an authorised lotissement, otherwise a garage eats 15 m² of the ground floor), and whether the street in front is wide enough for balconies. If it is not, the plan keeps French windows with a railing and the outdoor space moves to the roof.</p>
+  </div>
+</section>
+
+<section class="s" id="market">
+  <div class="sec-head">
+    <span class="eyebrow">02 · Who buys, and why this sells</span>
+    <h2>Design for the buyer who exists</h2>
+    <p>The Moroccan urban household is 3.7 people, 61% of them own their home, and two thirds live in exactly this building type: the "maison marocaine moderne" of R+1 to R+2. A three-bedroom apartment is the natural product for a young family leaving rent, or for a Moroccan living abroad buying a summer and retirement base. Two facts from the 2025 market data shape everything else.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Three-bedroom units are slightly over-supplied</h3>
+      <p>Two-bedroom apartments took 47% of purchase demand in 2025, and the last published split (early 2024) had three-bedroom units at about 31% of demand against 36% of supply. An F4 therefore does not sell on its bedroom count. It sells on light, on a salon that hosts fifteen guests, on finishes that look above its price, and on a price the buyer can finance. Its real size is a strength: about 60 m² net, 71 m² built plus balcony, courtyard or terrace, which sits in the 50–80 m² band that 41% of buyers search.</p>
+    </div>
+    <div class="card">
+      <h3>Price is the first filter, aid is the second</h3>
+      <p>Three out of four buyers rank price first. A new home sold at or under 700,000 MAD TTC to a first-time buyer can carry 70,000 MAD of direct state aid (Daam Sakane, 2024–2028), used by more than 105,000 households by June 2026, a quarter of them Moroccans living abroad. The aid is paid only when the seller is registered on the programme's platform, which a private individual may not be able to do; the legal section explains the choice. Where it applies, a price under that line widens the pool of buyers who can finance the purchase.</p>
+    </div>
+  </div>
+  <h3 style="margin-top:28px;margin-bottom:12px">What competing listings advertise, and what this plan answers</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Buyers look for</th><th>Why it matters</th><th>In this design</th></tr></thead>
+      <tbody>
+        <tr><td>Salon marocain that seats a family gathering</td><td>Still the room a Moroccan family judges first; listings sell "salon marocain + salon européen".</td><td>Front room sized for a U of sedari on the street façade; the dining zone sits in the courtyard-side hall next to it.</td></tr>
+        <tr><td>Light and no vis-à-vis</td><td>Cited as decisive by agents; luminosity moves price.</td><td>Every room opens on the street or on a 16 m² courtyard with a 4 m clear side. No room is borrowed light.</td></tr>
+        <tr><td>Closed or semi-open kitchen</td><td>Family buyers still reject fully open kitchens (odours, clutter).</td><td>Plan A: semi-open kitchen behind a glazed partition. Plan B: closed, fitted kitchen on the courtyard.</td></tr>
+        <tr><td>Two bathrooms or bath + guest WC</td><td>Standard in new F4 listings.</td><td>Plan A: one family bathroom with shower and wall-hung WC. Plan B: a larger bathroom; a second WC fits only in the ground-floor courtyard.</td></tr>
+        <tr><td>Outdoor space</td><td>Since 2020 buyers ask for a balcony, terrace or courtyard.</td><td>Balcony where the street allows it, private courtyard for the ground floor, private roof terrace for the top floor.</td></tr>
+        <tr><td>Double glazing, security door, fitted kitchen</td><td>Now the expected package in "moyen standing" new builds.</td><td>Specified in the finishing schedule below; double glazing is also required by the thermal code in most zones.</td></tr>
+        <tr><td>Titre foncier + permis d'habiter</td><td>No bank loan and no notarial sale without them.</td><td>The legal path below produces one individual title per apartment before the first sale.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s" id="plans">
+  <div class="sec-head">
+    <span class="eyebrow">03 · The plan</span>
+    <h2>One shell, two ways to divide it</h2>
+    <p>The building is organised in three bands. On the street: the shared stair and the two best rooms, the salon marocain and a bedroom, both opening on the balcony. In the middle: a band glazed onto the courtyard that holds the kitchen and the bathroom. At the back: two rooms on either side of the 16 m² courtyard, which brings daylight to every room of the plan. The stair is a single straight flight along the party wall with a return gallery, so each apartment door opens at the back of the cage, away from the street, and the ground-floor lobby stays under a full-height slab. The same concrete frame carries both versions below.</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:26px">
+    <b>What the geometry allows, honestly</b>
+    <p>With a 16 m² courtyard, a 1.10 m shared stair and the decree minimums, a 10 × 10 m lot leaves about 60 m² of net floor per apartment. Three bedrooms fit only if the kitchen is an open galley along the courtyard that also serves as the passage, the single bathroom is ventilated by duct, and there is no separate guest WC. That is Plan A, which answers the brief. Plan B trades the third bedroom for a closed kitchen, a real dining hall with a table for six and a larger bathroom; it is the version most Moroccan families would choose to live in. The three verifiers who checked both plans still expect Plan A to sell faster in a mid-market lotissement, because buyers count bedrooms first and the open kitchen can be screened with a glazed partition. Where the commune accepts a smaller courtyard (12 m², 3 m clear side, common in older lotissements) every room in Plan A grows. Decide after reading the note de renseignements.</p>
+  </div>
+
+  <h3 style="margin-bottom:12px">Plan A · three bedrooms, typical floor (1st and 2nd)</h3>
+  <figure class="fig">
+    <div class="draw"><svg viewBox="0 0 776 848" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="typical-title" class="plan">
+<defs><pattern id="typical-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" class="hatch"/></pattern></defs>
+<title id="typical-title">Plan A · étage courant (1er et 2e) · 3 chambres</title>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="plot"/>
+<rect x="84.2" y="357.0" width="136.4" height="334.8" class="room room-stair" style="fill:var(--pl-stair)"/>
+<rect x="84.2" y="84.2" width="186.0" height="260.4" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:var(--pl-patio)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:none" fill="url(#typical-hatch)"/>
+<rect x="543.0" y="84.2" width="148.8" height="260.4" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="233.0" y="357.0" width="347.2" height="111.6" class="room room-kitchen" style="fill:var(--pl-kitchen)"/>
+<rect x="592.6" y="357.0" width="99.2" height="111.6" class="room room-bath" style="fill:var(--pl-wet)"/>
+<rect x="233.0" y="481.0" width="248.0" height="210.8" class="room room-salon" style="fill:var(--pl-salon)"/>
+<rect x="493.4" y="481.0" width="198.4" height="210.8" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="233.0" y="704.2" width="396.8" height="49.6" class="room room-balcony" style="fill:var(--pl-balcony)"/>
+<rect x="78.0" y="350.8" width="148.8" height="347.2" class="wall"/>
+<rect x="78.0" y="78.0" width="198.4" height="272.8" class="wall"/>
+<rect x="276.4" y="78.0" width="260.4" height="272.8" class="wall"/>
+<rect x="536.8" y="78.0" width="161.2" height="272.8" class="wall"/>
+<rect x="226.8" y="350.8" width="359.6" height="124.0" class="wall"/>
+<rect x="586.4" y="350.8" width="111.6" height="124.0" class="wall"/>
+<rect x="226.8" y="474.8" width="260.4" height="223.2" class="wall"/>
+<rect x="487.2" y="474.8" width="210.8" height="223.2" class="wall"/>
+<rect x="226.8" y="698.0" width="409.2" height="62.0" class="balc"/>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="wall-outer"/>
+<rect x="264.0" y="689.32" width="186.0" height="17.36" class="gap"/>
+<line x1="264.0" y1="693.04" x2="450.0" y2="693.04" class="win"/>
+<line x1="264.0" y1="698.0" x2="450.0" y2="698.0" class="win"/>
+<line x1="264.0" y1="702.96" x2="450.0" y2="702.96" class="win"/>
+<rect x="512.0" y="689.32" width="124.0" height="17.36" class="gap"/>
+<line x1="512.0" y1="693.04" x2="636.0" y2="693.04" class="win"/>
+<line x1="512.0" y1="698.0" x2="636.0" y2="698.0" class="win"/>
+<line x1="512.0" y1="702.96" x2="636.0" y2="702.96" class="win"/>
+<rect x="267.72" y="127.6" width="17.36" height="136.4" class="gap"/>
+<line x1="271.44" y1="127.6" x2="271.44" y2="264.0" class="win"/>
+<line x1="276.4" y1="127.6" x2="276.4" y2="264.0" class="win"/>
+<line x1="281.36" y1="127.6" x2="281.36" y2="264.0" class="win"/>
+<rect x="528.12" y="127.6" width="17.36" height="99.2" class="gap"/>
+<line x1="531.84" y1="127.6" x2="531.84" y2="226.8" class="win"/>
+<line x1="536.8" y1="127.6" x2="536.8" y2="226.8" class="win"/>
+<line x1="541.76" y1="127.6" x2="541.76" y2="226.8" class="win"/>
+<rect x="301.2" y="342.12" width="210.8" height="17.36" class="gap"/>
+<line x1="301.2" y1="345.84" x2="512.0" y2="345.84" class="win"/>
+<line x1="301.2" y1="350.8" x2="512.0" y2="350.8" class="win"/>
+<line x1="301.2" y1="355.76" x2="512.0" y2="355.76" class="win"/>
+<rect x="218.12" y="363.2" width="17.36" height="55.8" class="gap"/>
+<line x1="226.8" y1="419.0" x2="282.6" y2="419.0" class="leaf"/>
+<path d="M282.6 419.0 A55.8 55.8 0 0 1 226.8 363.2" class="arc"/>
+<rect x="233.0" y="342.12" width="43.4" height="17.36" class="gap"/>
+<line x1="276.4" y1="350.8" x2="276.4" y2="307.4" class="leaf"/>
+<path d="M276.4 307.4 A43.4 43.4 0 0 1 233.0 350.8" class="arc"/>
+<rect x="543.0" y="342.12" width="43.4" height="17.36" class="gap"/>
+<line x1="543.0" y1="350.8" x2="543.0" y2="307.4" class="leaf"/>
+<path d="M543.0 307.4 A43.4 43.4 0 0 0 586.4 350.8" class="arc"/>
+<rect x="577.72" y="419.0" width="17.36" height="43.4" class="gap"/>
+<line x1="586.4" y1="419.0" x2="629.8" y2="419.0" class="leaf"/>
+<path d="M629.8 419.0 A43.4 43.4 0 0 0 586.4 462.4" class="arc"/>
+<rect x="276.4" y="466.12" width="55.8" height="17.36" class="gap"/>
+<line x1="276.4" y1="474.8" x2="276.4" y2="530.6" class="leaf"/>
+<path d="M276.4 530.6 A55.8 55.8 0 0 1 332.2 474.8" class="arc"/>
+<rect x="499.6" y="466.12" width="49.6" height="17.36" class="gap"/>
+<line x1="499.6" y1="474.8" x2="499.6" y2="524.4" class="leaf"/>
+<path d="M499.6 524.4 A49.6 49.6 0 0 1 549.2 474.8" class="arc"/>
+<line x1="84.2" y1="691.8" x2="152.4" y2="691.8" class="st"/>
+<line x1="84.2" y1="675.14" x2="152.4" y2="675.14" class="st"/>
+<line x1="84.2" y1="658.48" x2="152.4" y2="658.48" class="st"/>
+<line x1="84.2" y1="641.81" x2="152.4" y2="641.81" class="st"/>
+<line x1="84.2" y1="625.15" x2="152.4" y2="625.15" class="st"/>
+<line x1="84.2" y1="608.49" x2="152.4" y2="608.49" class="st"/>
+<line x1="84.2" y1="591.82" x2="152.4" y2="591.82" class="st"/>
+<line x1="84.2" y1="575.16" x2="152.4" y2="575.16" class="st"/>
+<line x1="84.2" y1="558.5" x2="152.4" y2="558.5" class="st"/>
+<line x1="84.2" y1="541.84" x2="152.4" y2="541.84" class="st"/>
+<line x1="84.2" y1="525.17" x2="152.4" y2="525.17" class="st"/>
+<line x1="84.2" y1="508.51" x2="152.4" y2="508.51" class="st"/>
+<line x1="84.2" y1="491.85" x2="152.4" y2="491.85" class="st"/>
+<line x1="84.2" y1="475.19" x2="152.4" y2="475.19" class="st"/>
+<line x1="84.2" y1="458.52" x2="152.4" y2="458.52" class="st"/>
+<line x1="84.2" y1="441.86" x2="152.4" y2="441.86" class="st"/>
+<line x1="84.2" y1="425.2" x2="152.4" y2="425.2" class="st"/>
+<line x1="152.4" y1="425.2" x2="152.4" y2="691.8" class="st-core"/>
+<line x1="84.2" y1="425.2" x2="220.6" y2="425.2" class="st"/>
+<line x1="186.5" y1="425.2" x2="186.5" y2="679.4" class="arc"/>
+<path d="M118.3 676.3 L118.3 434.5" class="st-arrow"/>
+<circle cx="118.3" cy="676.3" r="4.34" class="st-dot"/>
+<polygon points="110.86,450.0 125.74,450.0 118.3,431.4" class="st-head"/>
+<rect x="127.6" y="90.4" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="132.56" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="179.68" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="127.6" y1="133.8" x2="226.8" y2="133.8" class="fn"/>
+<rect x="90.4" y="301.2" width="136.4" height="37.2" rx="0.0" class="fn"/>
+<line x1="90.4" y1="301.2" x2="226.8" y2="338.4" class="fn-thin"/>
+<line x1="90.4" y1="338.4" x2="226.8" y2="301.2" class="fn-thin"/>
+<circle cx="326.0" cy="127.6" r="27.9" class="fn-plant"/>
+<circle cx="326.0" cy="127.6" r="15.35" class="fn-thin"/>
+<circle cx="487.2" cy="127.6" r="21.7" class="fn-plant"/>
+<circle cx="487.2" cy="127.6" r="11.94" class="fn-thin"/>
+<circle cx="487.2" cy="295.0" r="18.6" class="fn-plant"/>
+<circle cx="487.2" cy="295.0" r="10.23" class="fn-thin"/>
+<rect x="546.1" y="90.4" width="86.8" height="117.8" rx="2.48" class="fn"/>
+<rect x="551.06" y="95.36" width="35.96" height="27.9" rx="3.1" class="fn"/>
+<rect x="591.98" y="95.36" width="35.96" height="27.9" rx="3.1" class="fn"/>
+<line x1="546.1" y1="133.8" x2="632.9" y2="133.8" class="fn"/>
+<rect x="598.8" y="301.2" width="86.8" height="37.2" rx="0.0" class="fn"/>
+<line x1="598.8" y1="301.2" x2="685.6" y2="338.4" class="fn-thin"/>
+<line x1="598.8" y1="338.4" x2="685.6" y2="301.2" class="fn-thin"/>
+<rect x="236.1" y="428.3" width="223.2" height="37.2" rx="0.0" class="fn"/>
+<rect x="248.5" y="434.5" width="31.0" height="24.8" rx="3.1" class="fn-thin"/>
+<circle cx="431.4" cy="446.9" r="7.44" class="fn-thin"/>
+<circle cx="406.6" cy="446.9" r="7.44" class="fn-thin"/>
+<rect x="462.4" y="422.1" width="43.4" height="43.4" rx="0.0" class="fn"/>
+<rect x="518.2" y="360.1" width="55.8" height="37.2" rx="2.48" class="fn"/>
+<rect x="533.7" y="332.2" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="533.7" y="400.4" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="632.9" y="409.7" width="55.8" height="55.8" rx="0.0" class="fn"/>
+<circle cx="660.8" cy="437.6" r="3.72" class="fn-thin"/>
+<line x1="632.9" y1="409.7" x2="688.7" y2="465.5" class="fn-thin"/>
+<rect x="660.8" y="360.1" width="24.8" height="12.4" rx="1.86" class="fn"/>
+<ellipse cx="673.2" cy="388.0" rx="11.16" ry="15.5" class="fn"/>
+<rect x="595.7" y="360.1" width="34.1" height="24.8" rx="1.86" class="fn"/>
+<ellipse cx="612.75" cy="372.5" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="236.1" y="484.1" width="43.4" height="204.6" rx="0.0" class="fn"/>
+<rect x="434.5" y="484.1" width="43.4" height="204.6" rx="0.0" class="fn"/>
+<rect x="236.1" y="645.3" width="241.8" height="43.4" rx="0.0" class="fn"/>
+<rect x="319.8" y="564.7" width="74.4" height="43.4" rx="3.1" class="fn"/>
+<rect x="580.2" y="487.2" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="585.16" y="492.16" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="632.28" y="492.16" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="580.2" y1="530.6" x2="679.4" y2="530.6" class="fn"/>
+<rect x="499.6" y="648.4" width="186.0" height="37.2" rx="0.0" class="fn"/>
+<line x1="499.6" y1="648.4" x2="685.6" y2="685.6" class="fn-thin"/>
+<line x1="499.6" y1="685.6" x2="685.6" y2="648.4" class="fn-thin"/>
+<text x="152.4" y="644.4" class="lbl" text-anchor="middle">Escalier</text>
+<text x="152.4" y="659.4" class="lbl-a" text-anchor="middle">11.9 m²</text>
+<text x="177.2" y="210.4" class="lbl" text-anchor="middle">Chambre parentale</text>
+<text x="177.2" y="225.4" class="lbl-a" text-anchor="middle">12.6 m²</text>
+<text x="406.6" y="210.4" class="lbl" text-anchor="middle">Patio</text>
+<text x="406.6" y="225.4" class="lbl-a" text-anchor="middle">16.8 m²</text>
+<text x="617.4" y="210.4" class="lbl" text-anchor="middle">Chambre 3</text>
+<text x="617.4" y="225.4" class="lbl-a" text-anchor="middle">10.1 m²</text>
+<text x="406.6" y="408.8" class="lbl" text-anchor="middle">Cuisine ouverte</text>
+<text x="406.6" y="423.8" class="lbl-a" text-anchor="middle">10.1 m²</text>
+<text x="642.2" y="408.8" class="lbl" text-anchor="middle">SDB</text>
+<text x="642.2" y="423.8" class="lbl-a" text-anchor="middle">2.9 m²</text>
+<text x="357.0" y="582.4" class="lbl" text-anchor="middle">Salon marocain</text>
+<text x="357.0" y="597.4" class="lbl-a" text-anchor="middle">13.6 m²</text>
+<text x="592.6" y="582.4" class="lbl" text-anchor="middle">Chambre 2</text>
+<text x="592.6" y="597.4" class="lbl-a" text-anchor="middle">10.9 m²</text>
+<text x="431.4" y="733.0" class="lbl-s" text-anchor="middle">Balcon</text>
+<text x="192.7" y="394.2" class="note" text-anchor="middle">palier</text>
+<line x1="78.0" y1="43.9" x2="698.0" y2="43.9" class="dim"/>
+<line x1="78.0" y1="36.46" x2="78.0" y2="51.34" class="dim"/>
+<line x1="698.0" y1="36.46" x2="698.0" y2="51.34" class="dim"/>
+<text x="388.0" y="38.9" class="dim-t" text-anchor="middle">10 m</text>
+<line x1="43.9" y1="78.0" x2="43.9" y2="698.0" class="dim"/>
+<line x1="36.46" y1="78.0" x2="51.34" y2="78.0" class="dim"/>
+<line x1="36.46" y1="698.0" x2="51.34" y2="698.0" class="dim"/>
+<text x="38.9" y="388.0" class="dim-t" text-anchor="middle" transform="rotate(-90 38.9 388.0)">10 m</text>
+<line x1="78.0" y1="781.7" x2="226.8" y2="781.7" class="dim2"/>
+<line x1="78.0" y1="774.26" x2="78.0" y2="789.14" class="dim2"/>
+<line x1="226.8" y1="774.26" x2="226.8" y2="789.14" class="dim2"/>
+<text x="152.4" y="776.7" class="dim-t" text-anchor="middle">2.4 m</text>
+<line x1="226.8" y1="781.7" x2="487.2" y2="781.7" class="dim2"/>
+<line x1="226.8" y1="774.26" x2="226.8" y2="789.14" class="dim2"/>
+<line x1="487.2" y1="774.26" x2="487.2" y2="789.14" class="dim2"/>
+<text x="357.0" y="776.7" class="dim-t" text-anchor="middle">4.2 m</text>
+<line x1="487.2" y1="781.7" x2="698.0" y2="781.7" class="dim2"/>
+<line x1="487.2" y1="774.26" x2="487.2" y2="789.14" class="dim2"/>
+<line x1="698.0" y1="774.26" x2="698.0" y2="789.14" class="dim2"/>
+<text x="592.6" y="776.7" class="dim-t" text-anchor="middle">3.4 m</text>
+<line x1="725.9" y1="78.0" x2="725.9" y2="350.8" class="dim2"/>
+<line x1="718.46" y1="78.0" x2="733.34" y2="78.0" class="dim2"/>
+<line x1="718.46" y1="350.8" x2="733.34" y2="350.8" class="dim2"/>
+<text x="720.9" y="214.4" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 214.4)">4.4 m</text>
+<line x1="725.9" y1="350.8" x2="725.9" y2="474.8" class="dim2"/>
+<line x1="718.46" y1="350.8" x2="733.34" y2="350.8" class="dim2"/>
+<line x1="718.46" y1="474.8" x2="733.34" y2="474.8" class="dim2"/>
+<text x="720.9" y="412.8" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 412.8)">2 m</text>
+<line x1="725.9" y1="474.8" x2="725.9" y2="698.0" class="dim2"/>
+<line x1="718.46" y1="474.8" x2="733.34" y2="474.8" class="dim2"/>
+<line x1="718.46" y1="698.0" x2="733.34" y2="698.0" class="dim2"/>
+<text x="720.9" y="586.4" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 586.4)">3.6 m</text>
+<text x="388.0" y="794.0" class="street" text-anchor="middle">RUE</text>
+<text x="86.0" y="388.0" class="party" transform="rotate(-90 86.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="692.0" y="388.0" class="party" transform="rotate(90 692.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="388.0" y="91.0" class="party" text-anchor="middle">mitoyen</text>
+</svg>
+</div>
+    <figcaption><b>Net 60 m² + balcony 6.6 m²</b><span>Salon marocain 13.6 · chambre parentale 12.6 · chambre 2 10.9 · chambre 3 10.1 · cuisine ouverte 10.1 · SDB 2.9 · stair landing shared</span></figcaption>
+    <div class="legend"><span><i style="background:var(--pl-salon)"></i>Salon</span><span><i style="background:var(--pl-bed)"></i>Chambres</span><span><i style="background:var(--pl-kitchen)"></i>Cuisine</span><span><i style="background:var(--pl-wet)"></i>SDB / WC</span><span><i style="background:var(--pl-patio)"></i>Patio</span><span><i style="background:var(--pl-stair)"></i>Escalier</span><span><i style="background:var(--pl-hall)"></i>Hall / compteurs</span></div>
+  </figure>
+
+  <div class="grid-2" style="margin-top:22px">
+    <div class="card">
+      <h3>How Plan A lives</h3>
+      <ul>
+        <li><b>Arrival.</b> The straight flight lands at the back of the cage on a 1.10 m landing; the apartment door opens from there into the kitchen band, with the parents' room to the left and the salon straight ahead.</li>
+        <li><b>Salon marocain, 4.0 × 3.4 m clear.</b> A U of sedari 70 cm deep on three walls leaves 2.6 × 2.7 m of free floor for the tables; twelve guests sit comfortably. French window and balcony on the street. Daily meals take the place of one sedari side if the family prefers a table here.</li>
+        <li><b>Kitchen, 10.1 m².</b> A 3.6 m counter along the salon wall, fridge at the end, a 3.4 m glass wall onto the courtyard and a small breakfast table. It is also the passage to the salon and the bedrooms, so it must be kept tidy; a black-framed glazed screen behind the counter hides the cooking from the salon door.</li>
+        <li><b>Night side.</b> The parents' room and the third bedroom face the courtyard, quiet and private; the second bedroom faces the street with its own balcony access. Every bedroom has a built-in wardrobe.</li>
+        <li><b>Bathroom.</b> One family bathroom of 1.6 × 1.8 m with a 90 × 90 shower, wall-hung WC and vanity, on a plumbing stack shared by the three floors, with a ventilation duct rising to the roof.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Compromises to state to your architect</h3>
+      <ul>
+        <li>The kitchen is an open galley that doubles as the corridor. Family buyers prefer closed kitchens; the glazed screen answers some of them, Plan B answers all of them.</li>
+        <li>There is one bathroom and no separate guest WC; it has no window, so it needs a duct with mechanical extraction. Some commissions ask for a courette instead; check. The ground-floor apartment can add a second WC in its courtyard.</li>
+        <li>Chambre 3 is 2.4 m wide: a 140 bed along the wall and a 1.4 m wardrobe. It suits a child or a guest, not a couple.</li>
+        <li>The stair cage stands on the façade and its roof bulkhead comes close to the street line. If the règlement requires the bulkhead 3 m back, the stair moves to the back of the lot and the ground floor gets an entrance corridor; that costs the ground-floor apartment about 4 m².</li>
+        <li>The balcony assumes a street at least 10 m wide. On a narrower street, keep the French windows with a railing and the wall line stays flat.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px;margin-bottom:12px">Ground floor and roof</h3>
+  <div class="fig-2">
+    <figure class="fig">
+      <div class="draw"><svg viewBox="0 0 776 786" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ground-title" class="plan">
+<defs><pattern id="ground-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" class="hatch"/></pattern></defs>
+<title id="ground-title">Plan A · rez-de-chaussée · 3 chambres + cour privative</title>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="plot"/>
+<rect x="84.2" y="419.0" width="136.4" height="272.8" class="room room-stair" style="fill:var(--pl-stair)"/>
+<rect x="84.2" y="84.2" width="186.0" height="260.4" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:var(--pl-patio)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:none" fill="url(#ground-hatch)"/>
+<rect x="543.0" y="84.2" width="148.8" height="260.4" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="233.0" y="357.0" width="347.2" height="111.6" class="room room-kitchen" style="fill:var(--pl-kitchen)"/>
+<rect x="592.6" y="357.0" width="99.2" height="111.6" class="room room-bath" style="fill:var(--pl-wet)"/>
+<rect x="233.0" y="481.0" width="248.0" height="210.8" class="room room-salon" style="fill:var(--pl-salon)"/>
+<rect x="493.4" y="481.0" width="198.4" height="210.8" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="84.2" y="357.0" width="74.4" height="49.6" class="room room-tech" style="fill:var(--pl-hall)"/>
+<rect x="171.0" y="357.0" width="49.6" height="49.6" class="room room-hall" style="fill:var(--pl-hall)"/>
+<rect x="78.0" y="412.8" width="148.8" height="285.2" class="wall"/>
+<rect x="78.0" y="78.0" width="198.4" height="272.8" class="wall"/>
+<rect x="276.4" y="78.0" width="260.4" height="272.8" class="wall"/>
+<rect x="536.8" y="78.0" width="161.2" height="272.8" class="wall"/>
+<rect x="226.8" y="350.8" width="359.6" height="124.0" class="wall"/>
+<rect x="586.4" y="350.8" width="111.6" height="124.0" class="wall"/>
+<rect x="226.8" y="474.8" width="260.4" height="223.2" class="wall"/>
+<rect x="487.2" y="474.8" width="210.8" height="223.2" class="wall"/>
+<rect x="78.0" y="350.8" width="86.8" height="62.0" class="wall"/>
+<rect x="164.8" y="350.8" width="62.0" height="62.0" class="wall"/>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="wall-outer"/>
+<rect x="264.0" y="689.32" width="186.0" height="17.36" class="gap"/>
+<line x1="264.0" y1="693.04" x2="450.0" y2="693.04" class="win"/>
+<line x1="264.0" y1="698.0" x2="450.0" y2="698.0" class="win"/>
+<line x1="264.0" y1="702.96" x2="450.0" y2="702.96" class="win"/>
+<rect x="512.0" y="689.32" width="124.0" height="17.36" class="gap"/>
+<line x1="512.0" y1="693.04" x2="636.0" y2="693.04" class="win"/>
+<line x1="512.0" y1="698.0" x2="636.0" y2="698.0" class="win"/>
+<line x1="512.0" y1="702.96" x2="636.0" y2="702.96" class="win"/>
+<rect x="267.72" y="127.6" width="17.36" height="136.4" class="gap"/>
+<line x1="271.44" y1="127.6" x2="271.44" y2="264.0" class="win"/>
+<line x1="276.4" y1="127.6" x2="276.4" y2="264.0" class="win"/>
+<line x1="281.36" y1="127.6" x2="281.36" y2="264.0" class="win"/>
+<rect x="528.12" y="127.6" width="17.36" height="99.2" class="gap"/>
+<line x1="531.84" y1="127.6" x2="531.84" y2="226.8" class="win"/>
+<line x1="536.8" y1="127.6" x2="536.8" y2="226.8" class="win"/>
+<line x1="541.76" y1="127.6" x2="541.76" y2="226.8" class="win"/>
+<rect x="301.2" y="342.12" width="161.2" height="17.36" class="gap"/>
+<line x1="301.2" y1="345.84" x2="462.4" y2="345.84" class="win"/>
+<line x1="301.2" y1="350.8" x2="462.4" y2="350.8" class="win"/>
+<line x1="301.2" y1="355.76" x2="462.4" y2="355.76" class="win"/>
+<rect x="218.12" y="363.2" width="17.36" height="55.8" class="gap"/>
+<line x1="226.8" y1="419.0" x2="282.6" y2="419.0" class="leaf"/>
+<path d="M282.6 419.0 A55.8 55.8 0 0 1 226.8 363.2" class="arc"/>
+<rect x="233.0" y="342.12" width="43.4" height="17.36" class="gap"/>
+<line x1="276.4" y1="350.8" x2="276.4" y2="307.4" class="leaf"/>
+<path d="M276.4 307.4 A43.4 43.4 0 0 1 233.0 350.8" class="arc"/>
+<rect x="543.0" y="342.12" width="43.4" height="17.36" class="gap"/>
+<line x1="543.0" y1="350.8" x2="543.0" y2="307.4" class="leaf"/>
+<path d="M543.0 307.4 A43.4 43.4 0 0 0 586.4 350.8" class="arc"/>
+<rect x="577.72" y="419.0" width="17.36" height="43.4" class="gap"/>
+<line x1="586.4" y1="419.0" x2="629.8" y2="419.0" class="leaf"/>
+<path d="M629.8 419.0 A43.4 43.4 0 0 0 586.4 462.4" class="arc"/>
+<rect x="276.4" y="466.12" width="55.8" height="17.36" class="gap"/>
+<line x1="276.4" y1="474.8" x2="276.4" y2="530.6" class="leaf"/>
+<path d="M276.4 530.6 A55.8 55.8 0 0 1 332.2 474.8" class="arc"/>
+<rect x="499.6" y="466.12" width="49.6" height="17.36" class="gap"/>
+<line x1="499.6" y1="474.8" x2="499.6" y2="524.4" class="leaf"/>
+<path d="M499.6 524.4 A49.6 49.6 0 0 1 549.2 474.8" class="arc"/>
+<rect x="152.4" y="689.32" width="74.4" height="17.36" class="gap"/>
+<line x1="226.8" y1="698.0" x2="226.8" y2="623.6" class="leaf"/>
+<path d="M226.8 623.6 A74.4 74.4 0 0 1 152.4 698.0" class="arc"/>
+<rect x="474.8" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="524.4" y1="350.8" x2="524.4" y2="301.2" class="leaf"/>
+<path d="M524.4 301.2 A49.6 49.6 0 0 1 474.8 350.8" class="arc"/>
+<line x1="84.2" y1="691.8" x2="152.4" y2="691.8" class="st"/>
+<line x1="84.2" y1="673.2" x2="152.4" y2="673.2" class="st"/>
+<line x1="84.2" y1="654.6" x2="152.4" y2="654.6" class="st"/>
+<line x1="84.2" y1="636.0" x2="152.4" y2="636.0" class="st"/>
+<line x1="84.2" y1="617.4" x2="152.4" y2="617.4" class="st"/>
+<line x1="84.2" y1="598.8" x2="152.4" y2="598.8" class="st"/>
+<line x1="84.2" y1="580.2" x2="152.4" y2="580.2" class="st"/>
+<line x1="84.2" y1="561.6" x2="152.4" y2="561.6" class="st"/>
+<line x1="84.2" y1="543.0" x2="152.4" y2="543.0" class="st"/>
+<line x1="84.2" y1="524.4" x2="152.4" y2="524.4" class="st"/>
+<line x1="84.2" y1="505.8" x2="152.4" y2="505.8" class="st"/>
+<line x1="84.2" y1="487.2" x2="152.4" y2="487.2" class="st"/>
+<line x1="84.2" y1="468.6" x2="152.4" y2="468.6" class="st"/>
+<line x1="84.2" y1="450.0" x2="152.4" y2="450.0" class="st"/>
+<line x1="84.2" y1="431.4" x2="152.4" y2="431.4" class="st"/>
+<line x1="152.4" y1="431.4" x2="152.4" y2="691.8" class="st-core"/>
+<line x1="84.2" y1="431.4" x2="220.6" y2="431.4" class="st"/>
+<line x1="186.5" y1="431.4" x2="186.5" y2="679.4" class="arc"/>
+<path d="M118.3 676.3 L118.3 440.7" class="st-arrow"/>
+<circle cx="118.3" cy="676.3" r="4.34" class="st-dot"/>
+<polygon points="110.86,456.2 125.74,456.2 118.3,437.6" class="st-head"/>
+<rect x="127.6" y="90.4" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="132.56" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="179.68" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="127.6" y1="133.8" x2="226.8" y2="133.8" class="fn"/>
+<rect x="90.4" y="301.2" width="136.4" height="37.2" rx="0.0" class="fn"/>
+<line x1="90.4" y1="301.2" x2="226.8" y2="338.4" class="fn-thin"/>
+<line x1="90.4" y1="338.4" x2="226.8" y2="301.2" class="fn-thin"/>
+<circle cx="326.0" cy="127.6" r="27.9" class="fn-plant"/>
+<circle cx="326.0" cy="127.6" r="15.35" class="fn-thin"/>
+<circle cx="487.2" cy="127.6" r="21.7" class="fn-plant"/>
+<circle cx="487.2" cy="127.6" r="11.94" class="fn-thin"/>
+<circle cx="487.2" cy="295.0" r="18.6" class="fn-plant"/>
+<circle cx="487.2" cy="295.0" r="10.23" class="fn-thin"/>
+<rect x="546.1" y="90.4" width="86.8" height="117.8" rx="2.48" class="fn"/>
+<rect x="551.06" y="95.36" width="35.96" height="27.9" rx="3.1" class="fn"/>
+<rect x="591.98" y="95.36" width="35.96" height="27.9" rx="3.1" class="fn"/>
+<line x1="546.1" y1="133.8" x2="632.9" y2="133.8" class="fn"/>
+<rect x="598.8" y="301.2" width="86.8" height="37.2" rx="0.0" class="fn"/>
+<line x1="598.8" y1="301.2" x2="685.6" y2="338.4" class="fn-thin"/>
+<line x1="598.8" y1="338.4" x2="685.6" y2="301.2" class="fn-thin"/>
+<rect x="236.1" y="428.3" width="223.2" height="37.2" rx="0.0" class="fn"/>
+<rect x="248.5" y="434.5" width="31.0" height="24.8" rx="3.1" class="fn-thin"/>
+<circle cx="431.4" cy="446.9" r="7.44" class="fn-thin"/>
+<circle cx="406.6" cy="446.9" r="7.44" class="fn-thin"/>
+<rect x="462.4" y="422.1" width="43.4" height="43.4" rx="0.0" class="fn"/>
+<rect x="518.2" y="360.1" width="55.8" height="37.2" rx="2.48" class="fn"/>
+<rect x="533.7" y="332.2" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="533.7" y="400.4" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="632.9" y="409.7" width="55.8" height="55.8" rx="0.0" class="fn"/>
+<circle cx="660.8" cy="437.6" r="3.72" class="fn-thin"/>
+<line x1="632.9" y1="409.7" x2="688.7" y2="465.5" class="fn-thin"/>
+<rect x="660.8" y="360.1" width="24.8" height="12.4" rx="1.86" class="fn"/>
+<ellipse cx="673.2" cy="388.0" rx="11.16" ry="15.5" class="fn"/>
+<rect x="595.7" y="360.1" width="34.1" height="24.8" rx="1.86" class="fn"/>
+<ellipse cx="612.75" cy="372.5" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="236.1" y="484.1" width="43.4" height="204.6" rx="0.0" class="fn"/>
+<rect x="434.5" y="484.1" width="43.4" height="204.6" rx="0.0" class="fn"/>
+<rect x="236.1" y="645.3" width="241.8" height="43.4" rx="0.0" class="fn"/>
+<rect x="319.8" y="564.7" width="74.4" height="43.4" rx="3.1" class="fn"/>
+<rect x="580.2" y="487.2" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="585.16" y="492.16" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="632.28" y="492.16" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="580.2" y1="530.6" x2="679.4" y2="530.6" class="fn"/>
+<rect x="499.6" y="648.4" width="186.0" height="37.2" rx="0.0" class="fn"/>
+<line x1="499.6" y1="648.4" x2="685.6" y2="685.6" class="fn-thin"/>
+<line x1="499.6" y1="685.6" x2="685.6" y2="648.4" class="fn-thin"/>
+<text x="152.4" y="619.6" class="lbl" text-anchor="middle">Escalier</text>
+<text x="152.4" y="634.6" class="lbl-a" text-anchor="middle">9.7 m²</text>
+<text x="177.2" y="210.4" class="lbl" text-anchor="middle">Chambre parentale</text>
+<text x="177.2" y="225.4" class="lbl-a" text-anchor="middle">12.6 m²</text>
+<text x="406.6" y="210.4" class="lbl" text-anchor="middle">Cour privative</text>
+<text x="406.6" y="225.4" class="lbl-a" text-anchor="middle">16.8 m²</text>
+<text x="617.4" y="210.4" class="lbl" text-anchor="middle">Chambre 3</text>
+<text x="617.4" y="225.4" class="lbl-a" text-anchor="middle">10.1 m²</text>
+<text x="406.6" y="408.8" class="lbl" text-anchor="middle">Cuisine ouverte</text>
+<text x="406.6" y="423.8" class="lbl-a" text-anchor="middle">10.1 m²</text>
+<text x="642.2" y="408.8" class="lbl" text-anchor="middle">SDB</text>
+<text x="642.2" y="423.8" class="lbl-a" text-anchor="middle">2.9 m²</text>
+<text x="357.0" y="582.4" class="lbl" text-anchor="middle">Salon marocain</text>
+<text x="357.0" y="597.4" class="lbl-a" text-anchor="middle">13.6 m²</text>
+<text x="592.6" y="582.4" class="lbl" text-anchor="middle">Chambre 2</text>
+<text x="592.6" y="597.4" class="lbl-a" text-anchor="middle">10.9 m²</text>
+<text x="121.4" y="385.8" class="lbl-s" text-anchor="middle">Cpt.</text>
+<text x="195.8" y="385.8" class="lbl-s" text-anchor="middle"></text>
+<text x="192.7" y="394.2" class="note" text-anchor="middle">palier</text>
+<text x="499.6" y="319.8" class="note" text-anchor="middle">porte-fenêtre</text>
+<line x1="78.0" y1="43.9" x2="698.0" y2="43.9" class="dim"/>
+<line x1="78.0" y1="36.46" x2="78.0" y2="51.34" class="dim"/>
+<line x1="698.0" y1="36.46" x2="698.0" y2="51.34" class="dim"/>
+<text x="388.0" y="38.9" class="dim-t" text-anchor="middle">10 m</text>
+<line x1="43.9" y1="78.0" x2="43.9" y2="698.0" class="dim"/>
+<line x1="36.46" y1="78.0" x2="51.34" y2="78.0" class="dim"/>
+<line x1="36.46" y1="698.0" x2="51.34" y2="698.0" class="dim"/>
+<text x="38.9" y="388.0" class="dim-t" text-anchor="middle" transform="rotate(-90 38.9 388.0)">10 m</text>
+<line x1="725.9" y1="78.0" x2="725.9" y2="350.8" class="dim2"/>
+<line x1="718.46" y1="78.0" x2="733.34" y2="78.0" class="dim2"/>
+<line x1="718.46" y1="350.8" x2="733.34" y2="350.8" class="dim2"/>
+<text x="720.9" y="214.4" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 214.4)">4.4 m</text>
+<line x1="725.9" y1="350.8" x2="725.9" y2="474.8" class="dim2"/>
+<line x1="718.46" y1="350.8" x2="733.34" y2="350.8" class="dim2"/>
+<line x1="718.46" y1="474.8" x2="733.34" y2="474.8" class="dim2"/>
+<text x="720.9" y="412.8" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 412.8)">2 m</text>
+<line x1="725.9" y1="474.8" x2="725.9" y2="698.0" class="dim2"/>
+<line x1="718.46" y1="474.8" x2="733.34" y2="474.8" class="dim2"/>
+<line x1="718.46" y1="698.0" x2="733.34" y2="698.0" class="dim2"/>
+<text x="720.9" y="586.4" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 586.4)">3.6 m</text>
+<line x1="78.0" y1="719.7" x2="226.8" y2="719.7" class="dim2"/>
+<line x1="78.0" y1="712.26" x2="78.0" y2="727.14" class="dim2"/>
+<line x1="226.8" y1="712.26" x2="226.8" y2="727.14" class="dim2"/>
+<text x="152.4" y="714.7" class="dim-t" text-anchor="middle">2.4 m</text>
+<line x1="226.8" y1="719.7" x2="487.2" y2="719.7" class="dim2"/>
+<line x1="226.8" y1="712.26" x2="226.8" y2="727.14" class="dim2"/>
+<line x1="487.2" y1="712.26" x2="487.2" y2="727.14" class="dim2"/>
+<text x="357.0" y="714.7" class="dim-t" text-anchor="middle">4.2 m</text>
+<line x1="487.2" y1="719.7" x2="698.0" y2="719.7" class="dim2"/>
+<line x1="487.2" y1="712.26" x2="487.2" y2="727.14" class="dim2"/>
+<line x1="698.0" y1="712.26" x2="698.0" y2="727.14" class="dim2"/>
+<text x="592.6" y="714.7" class="dim-t" text-anchor="middle">3.4 m</text>
+<text x="388.0" y="732.0" class="street" text-anchor="middle">RUE</text>
+<text x="86.0" y="388.0" class="party" transform="rotate(-90 86.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="692.0" y="388.0" class="party" transform="rotate(90 692.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="388.0" y="91.0" class="party" text-anchor="middle">mitoyen</text>
+</svg>
+</div>
+      <figcaption><b>Ground floor · same apartment, private courtyard</b><span>Street door 1.20 m into the stair lobby, meter cupboard beside the landing, a French window from the kitchen into the courtyard. Street windows get grilles or anti-break-in glazing; the courtyard floor is sold with this unit as a private cour, written into the règlement de copropriété with the obligation to keep it open.</span></figcaption>
+    </figure>
+    <figure class="fig">
+      <div class="draw"><svg viewBox="0 0 776 786" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="roof-title" class="plan">
+<defs><pattern id="roof-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" class="hatch"/></pattern></defs>
+<title id="roof-title">Terrasse · buanderies, réservoirs, sortie d'escalier</title>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="plot"/>
+<rect x="84.2" y="357.0" width="136.4" height="334.8" class="room room-stair" style="fill:var(--pl-stair)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:var(--pl-patio)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:none" fill="url(#roof-hatch)"/>
+<rect x="84.2" y="84.2" width="186.0" height="124.0" class="room room-tech" style="fill:var(--pl-hall)"/>
+<rect x="84.2" y="220.6" width="186.0" height="124.0" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="543.0" y="84.2" width="68.2" height="260.4" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="623.6" y="84.2" width="68.2" height="260.4" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="233.0" y="357.0" width="458.8" height="111.6" class="room room-terrace" style="fill:var(--pl-balcony)"/>
+<rect x="233.0" y="481.0" width="458.8" height="210.8" class="room room-terrace" style="fill:var(--pl-balcony)"/>
+<rect x="78.0" y="350.8" width="148.8" height="347.2" class="wall"/>
+<rect x="276.4" y="78.0" width="260.4" height="272.8" class="wall"/>
+<rect x="78.0" y="78.0" width="198.4" height="136.4" class="wall"/>
+<rect x="78.0" y="214.4" width="198.4" height="136.4" class="wall"/>
+<rect x="536.8" y="78.0" width="80.6" height="272.8" class="wall"/>
+<rect x="617.4" y="78.0" width="80.6" height="272.8" class="wall"/>
+<rect x="226.8" y="350.8" width="471.2" height="124.0" class="wall"/>
+<rect x="226.8" y="474.8" width="471.2" height="223.2" class="wall"/>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="wall-outer"/>
+<rect x="363.2" y="466.12" width="186.0" height="17.36" class="gap"/>
+<line x1="363.2" y1="466.12" x2="363.2" y2="483.48" class="wall-thin"/>
+<line x1="549.2" y1="466.12" x2="549.2" y2="483.48" class="wall-thin"/>
+<rect x="218.12" y="363.2" width="17.36" height="55.8" class="gap"/>
+<line x1="226.8" y1="419.0" x2="282.6" y2="419.0" class="leaf"/>
+<path d="M282.6 419.0 A55.8 55.8 0 0 1 226.8 363.2" class="arc"/>
+<rect x="226.8" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="276.4" y1="350.8" x2="276.4" y2="301.2" class="leaf"/>
+<path d="M276.4 301.2 A49.6 49.6 0 0 1 226.8 350.8" class="arc"/>
+<rect x="543.0" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="543.0" y1="350.8" x2="543.0" y2="301.2" class="leaf"/>
+<path d="M543.0 301.2 A49.6 49.6 0 0 0 592.6 350.8" class="arc"/>
+<rect x="623.6" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="623.6" y1="350.8" x2="623.6" y2="301.2" class="leaf"/>
+<path d="M623.6 301.2 A49.6 49.6 0 0 0 673.2 350.8" class="arc"/>
+<line x1="84.2" y1="691.8" x2="152.4" y2="691.8" class="st"/>
+<line x1="84.2" y1="675.14" x2="152.4" y2="675.14" class="st"/>
+<line x1="84.2" y1="658.48" x2="152.4" y2="658.48" class="st"/>
+<line x1="84.2" y1="641.81" x2="152.4" y2="641.81" class="st"/>
+<line x1="84.2" y1="625.15" x2="152.4" y2="625.15" class="st"/>
+<line x1="84.2" y1="608.49" x2="152.4" y2="608.49" class="st"/>
+<line x1="84.2" y1="591.82" x2="152.4" y2="591.82" class="st"/>
+<line x1="84.2" y1="575.16" x2="152.4" y2="575.16" class="st"/>
+<line x1="84.2" y1="558.5" x2="152.4" y2="558.5" class="st"/>
+<line x1="84.2" y1="541.84" x2="152.4" y2="541.84" class="st"/>
+<line x1="84.2" y1="525.17" x2="152.4" y2="525.17" class="st"/>
+<line x1="84.2" y1="508.51" x2="152.4" y2="508.51" class="st"/>
+<line x1="84.2" y1="491.85" x2="152.4" y2="491.85" class="st"/>
+<line x1="84.2" y1="475.19" x2="152.4" y2="475.19" class="st"/>
+<line x1="84.2" y1="458.52" x2="152.4" y2="458.52" class="st"/>
+<line x1="84.2" y1="441.86" x2="152.4" y2="441.86" class="st"/>
+<line x1="84.2" y1="425.2" x2="152.4" y2="425.2" class="st"/>
+<line x1="152.4" y1="425.2" x2="152.4" y2="691.8" class="st-core"/>
+<line x1="84.2" y1="425.2" x2="220.6" y2="425.2" class="st"/>
+<line x1="186.5" y1="425.2" x2="186.5" y2="679.4" class="arc"/>
+<path d="M118.3 676.3 L118.3 434.5" class="st-arrow"/>
+<circle cx="118.3" cy="676.3" r="4.34" class="st-dot"/>
+<polygon points="110.86,450.0 125.74,450.0 118.3,431.4" class="st-head"/>
+<rect x="90.4" y="226.8" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="109.0" cy="245.4" r="12.4" class="fn-thin"/>
+<rect x="140.0" y="226.8" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="158.6" cy="240.75" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="546.1" y="90.4" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="564.7" cy="109.0" r="12.4" class="fn-thin"/>
+<rect x="546.1" y="140.0" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="564.7" cy="153.95" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="626.7" y="90.4" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="645.3" cy="109.0" r="12.4" class="fn-thin"/>
+<rect x="626.7" y="140.0" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="645.3" cy="153.95" rx="11.16" ry="8.06" class="fn-thin"/>
+<text x="152.4" y="644.4" class="lbl" text-anchor="middle">Sortie escalier</text>
+<text x="152.4" y="659.4" class="lbl-a" text-anchor="middle">11.9 m²</text>
+<text x="406.6" y="218.4" class="lbl" text-anchor="middle">Vide sur patio</text>
+<text x="177.2" y="142.2" class="lbl" text-anchor="middle">Réservoirs · solaire</text>
+<text x="177.2" y="157.2" class="lbl-a" text-anchor="middle">6 m²</text>
+<text x="177.2" y="278.6" class="lbl" text-anchor="middle">Buanderie apt 3</text>
+<text x="177.2" y="293.6" class="lbl-a" text-anchor="middle">6 m²</text>
+<text x="577.1" y="210.4" class="lbl-s" text-anchor="middle">Buand. apt 1</text>
+<text x="577.1" y="225.4" class="lbl-s-a" text-anchor="middle">4.6 m²</text>
+<text x="657.7" y="210.4" class="lbl-s" text-anchor="middle">Buand. apt 2</text>
+<text x="657.7" y="225.4" class="lbl-s-a" text-anchor="middle">4.6 m²</text>
+<text x="462.4" y="408.8" class="lbl" text-anchor="middle">Terrasse commune</text>
+<text x="462.4" y="423.8" class="lbl-a" text-anchor="middle">13.3 m²</text>
+<text x="462.4" y="582.4" class="lbl" text-anchor="middle">Terrasse privative apt 3</text>
+<text x="462.4" y="597.4" class="lbl-a" text-anchor="middle">25.2 m²</text>
+<text x="406.6" y="226.8" class="note" text-anchor="middle">garde-corps 1,10 m</text>
+<text x="462.4" y="673.2" class="note" text-anchor="middle">acrotère 1,10 m sur rue</text>
+<text x="462.4" y="605.0" class="note" text-anchor="middle">25 m² réservés à l'appartement du 2e</text>
+<text x="177.2" y="152.4" class="note" text-anchor="middle">accès par la buanderie 3</text>
+<line x1="78.0" y1="43.9" x2="698.0" y2="43.9" class="dim"/>
+<line x1="78.0" y1="36.46" x2="78.0" y2="51.34" class="dim"/>
+<line x1="698.0" y1="36.46" x2="698.0" y2="51.34" class="dim"/>
+<text x="388.0" y="38.9" class="dim-t" text-anchor="middle">10 m</text>
+<line x1="43.9" y1="78.0" x2="43.9" y2="698.0" class="dim"/>
+<line x1="36.46" y1="78.0" x2="51.34" y2="78.0" class="dim"/>
+<line x1="36.46" y1="698.0" x2="51.34" y2="698.0" class="dim"/>
+<text x="38.9" y="388.0" class="dim-t" text-anchor="middle" transform="rotate(-90 38.9 388.0)">10 m</text>
+<line x1="78.0" y1="59.4" x2="276.4" y2="59.4" class="dim2"/>
+<line x1="78.0" y1="51.96" x2="78.0" y2="66.84" class="dim2"/>
+<line x1="276.4" y1="51.96" x2="276.4" y2="66.84" class="dim2"/>
+<text x="177.2" y="54.4" class="dim-t" text-anchor="middle">3.2 m</text>
+<line x1="276.4" y1="59.4" x2="536.8" y2="59.4" class="dim2"/>
+<line x1="276.4" y1="51.96" x2="276.4" y2="66.84" class="dim2"/>
+<line x1="536.8" y1="51.96" x2="536.8" y2="66.84" class="dim2"/>
+<text x="406.6" y="54.4" class="dim-t" text-anchor="middle">4.2 m</text>
+<line x1="536.8" y1="59.4" x2="698.0" y2="59.4" class="dim2"/>
+<line x1="536.8" y1="51.96" x2="536.8" y2="66.84" class="dim2"/>
+<line x1="698.0" y1="51.96" x2="698.0" y2="66.84" class="dim2"/>
+<text x="617.4" y="54.4" class="dim-t" text-anchor="middle">2.6 m</text>
+<text x="388.0" y="732.0" class="street" text-anchor="middle">RUE</text>
+<text x="86.0" y="388.0" class="party" transform="rotate(-90 86.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="692.0" y="388.0" class="party" transform="rotate(90 692.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="388.0" y="91.0" class="party" text-anchor="middle">mitoyen</text>
+</svg>
+</div>
+      <figcaption><b>Roof terrace</b><span>One laundry room per apartment with its own door, a zone for water tanks and solar heaters, a 13 m² common strip and 25 m² on the street side reserved to the top apartment, which is what justifies its premium. Parapet 1.10 m, guard-rail around the courtyard void.</span></figcaption>
+    </figure>
+  </div>
+
+  <h3 style="margin-top:32px;margin-bottom:12px">Plan B · two bedrooms, closed kitchen, dining hall</h3>
+  <figure class="fig">
+    <div class="draw"><svg viewBox="0 0 776 848" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="planB-title" class="plan">
+<defs><pattern id="planB-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" class="hatch"/></pattern></defs>
+<title id="planB-title">Plan B · étage courant · 2 chambres, cuisine fermée, hall-séjour</title>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="plot"/>
+<rect x="84.2" y="344.6" width="136.4" height="347.2" class="room room-stair" style="fill:var(--pl-stair)"/>
+<rect x="84.2" y="84.2" width="186.0" height="248.0" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="282.6" y="84.2" width="248.0" height="248.0" class="room room-patio" style="fill:var(--pl-patio)"/>
+<rect x="282.6" y="84.2" width="248.0" height="248.0" class="room room-patio" style="fill:none" fill="url(#planB-hatch)"/>
+<rect x="543.0" y="84.2" width="148.8" height="248.0" class="room room-kitchen" style="fill:var(--pl-kitchen)"/>
+<rect x="233.0" y="344.6" width="347.2" height="142.6" class="room room-hall" style="fill:var(--pl-hall)"/>
+<rect x="592.6" y="344.6" width="99.2" height="142.6" class="room room-bath" style="fill:var(--pl-wet)"/>
+<rect x="233.0" y="499.6" width="266.6" height="192.2" class="room room-salon" style="fill:var(--pl-salon)"/>
+<rect x="512.0" y="499.6" width="179.8" height="192.2" class="room room-bedroom" style="fill:var(--pl-bed)"/>
+<rect x="233.0" y="704.2" width="396.8" height="49.6" class="room room-balcony" style="fill:var(--pl-balcony)"/>
+<rect x="78.0" y="338.4" width="148.8" height="359.6" class="wall"/>
+<rect x="78.0" y="78.0" width="198.4" height="260.4" class="wall"/>
+<rect x="276.4" y="78.0" width="260.4" height="260.4" class="wall"/>
+<rect x="536.8" y="78.0" width="161.2" height="260.4" class="wall"/>
+<rect x="226.8" y="338.4" width="359.6" height="155.0" class="wall"/>
+<rect x="586.4" y="338.4" width="111.6" height="155.0" class="wall"/>
+<rect x="226.8" y="493.4" width="279.0" height="204.6" class="wall"/>
+<rect x="505.8" y="493.4" width="192.2" height="204.6" class="wall"/>
+<rect x="226.8" y="698.0" width="409.2" height="62.0" class="balc"/>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="wall-outer"/>
+<rect x="276.4" y="689.32" width="186.0" height="17.36" class="gap"/>
+<line x1="276.4" y1="693.04" x2="462.4" y2="693.04" class="win"/>
+<line x1="276.4" y1="698.0" x2="462.4" y2="698.0" class="win"/>
+<line x1="276.4" y1="702.96" x2="462.4" y2="702.96" class="win"/>
+<rect x="530.6" y="689.32" width="99.2" height="17.36" class="gap"/>
+<line x1="530.6" y1="693.04" x2="629.8" y2="693.04" class="win"/>
+<line x1="530.6" y1="698.0" x2="629.8" y2="698.0" class="win"/>
+<line x1="530.6" y1="702.96" x2="629.8" y2="702.96" class="win"/>
+<rect x="267.72" y="127.6" width="17.36" height="136.4" class="gap"/>
+<line x1="271.44" y1="127.6" x2="271.44" y2="264.0" class="win"/>
+<line x1="276.4" y1="127.6" x2="276.4" y2="264.0" class="win"/>
+<line x1="281.36" y1="127.6" x2="281.36" y2="264.0" class="win"/>
+<rect x="528.12" y="127.6" width="17.36" height="99.2" class="gap"/>
+<line x1="531.84" y1="127.6" x2="531.84" y2="226.8" class="win"/>
+<line x1="536.8" y1="127.6" x2="536.8" y2="226.8" class="win"/>
+<line x1="541.76" y1="127.6" x2="541.76" y2="226.8" class="win"/>
+<rect x="301.2" y="329.72" width="210.8" height="17.36" class="gap"/>
+<line x1="301.2" y1="333.44" x2="512.0" y2="333.44" class="win"/>
+<line x1="301.2" y1="338.4" x2="512.0" y2="338.4" class="win"/>
+<line x1="301.2" y1="343.36" x2="512.0" y2="343.36" class="win"/>
+<rect x="218.12" y="350.8" width="17.36" height="55.8" class="gap"/>
+<line x1="226.8" y1="406.6" x2="282.6" y2="406.6" class="leaf"/>
+<path d="M282.6 406.6 A55.8 55.8 0 0 1 226.8 350.8" class="arc"/>
+<rect x="233.0" y="329.72" width="43.4" height="17.36" class="gap"/>
+<line x1="276.4" y1="338.4" x2="276.4" y2="295.0" class="leaf"/>
+<path d="M276.4 295.0 A43.4 43.4 0 0 1 233.0 338.4" class="arc"/>
+<rect x="536.8" y="329.72" width="49.6" height="17.36" class="gap"/>
+<line x1="586.4" y1="338.4" x2="586.4" y2="288.8" class="leaf"/>
+<path d="M586.4 288.8 A49.6 49.6 0 0 1 536.8 338.4" class="arc"/>
+<rect x="577.72" y="406.6" width="17.36" height="43.4" class="gap"/>
+<line x1="586.4" y1="406.6" x2="629.8" y2="406.6" class="leaf"/>
+<path d="M629.8 406.6 A43.4 43.4 0 0 0 586.4 450.0" class="arc"/>
+<rect x="276.4" y="484.72" width="55.8" height="17.36" class="gap"/>
+<line x1="276.4" y1="493.4" x2="276.4" y2="549.2" class="leaf"/>
+<path d="M276.4 549.2 A55.8 55.8 0 0 1 332.2 493.4" class="arc"/>
+<rect x="518.2" y="484.72" width="49.6" height="17.36" class="gap"/>
+<line x1="518.2" y1="493.4" x2="518.2" y2="543.0" class="leaf"/>
+<path d="M518.2 543.0 A49.6 49.6 0 0 1 567.8 493.4" class="arc"/>
+<line x1="84.2" y1="691.8" x2="152.4" y2="691.8" class="st"/>
+<line x1="84.2" y1="674.36" x2="152.4" y2="674.36" class="st"/>
+<line x1="84.2" y1="656.93" x2="152.4" y2="656.93" class="st"/>
+<line x1="84.2" y1="639.49" x2="152.4" y2="639.49" class="st"/>
+<line x1="84.2" y1="622.05" x2="152.4" y2="622.05" class="st"/>
+<line x1="84.2" y1="604.61" x2="152.4" y2="604.61" class="st"/>
+<line x1="84.2" y1="587.17" x2="152.4" y2="587.17" class="st"/>
+<line x1="84.2" y1="569.74" x2="152.4" y2="569.74" class="st"/>
+<line x1="84.2" y1="552.3" x2="152.4" y2="552.3" class="st"/>
+<line x1="84.2" y1="534.86" x2="152.4" y2="534.86" class="st"/>
+<line x1="84.2" y1="517.42" x2="152.4" y2="517.42" class="st"/>
+<line x1="84.2" y1="499.99" x2="152.4" y2="499.99" class="st"/>
+<line x1="84.2" y1="482.55" x2="152.4" y2="482.55" class="st"/>
+<line x1="84.2" y1="465.11" x2="152.4" y2="465.11" class="st"/>
+<line x1="84.2" y1="447.68" x2="152.4" y2="447.68" class="st"/>
+<line x1="84.2" y1="430.24" x2="152.4" y2="430.24" class="st"/>
+<line x1="84.2" y1="412.8" x2="152.4" y2="412.8" class="st"/>
+<line x1="152.4" y1="412.8" x2="152.4" y2="691.8" class="st-core"/>
+<line x1="84.2" y1="412.8" x2="220.6" y2="412.8" class="st"/>
+<line x1="186.5" y1="412.8" x2="186.5" y2="679.4" class="arc"/>
+<path d="M118.3 676.3 L118.3 422.1" class="st-arrow"/>
+<circle cx="118.3" cy="676.3" r="4.34" class="st-dot"/>
+<polygon points="110.86,437.6 125.74,437.6 118.3,419.0" class="st-head"/>
+<rect x="127.6" y="90.4" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="132.56" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="179.68" y="95.36" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="127.6" y1="133.8" x2="226.8" y2="133.8" class="fn"/>
+<rect x="90.4" y="288.8" width="136.4" height="37.2" rx="0.0" class="fn"/>
+<line x1="90.4" y1="288.8" x2="226.8" y2="326.0" class="fn-thin"/>
+<line x1="90.4" y1="326.0" x2="226.8" y2="288.8" class="fn-thin"/>
+<circle cx="326.0" cy="127.6" r="27.9" class="fn-plant"/>
+<circle cx="326.0" cy="127.6" r="15.35" class="fn-thin"/>
+<circle cx="487.2" cy="127.6" r="21.7" class="fn-plant"/>
+<circle cx="487.2" cy="127.6" r="11.94" class="fn-thin"/>
+<circle cx="487.2" cy="282.6" r="18.6" class="fn-plant"/>
+<circle cx="487.2" cy="282.6" r="10.23" class="fn-thin"/>
+<rect x="546.1" y="87.3" width="37.2" height="198.4" rx="0.0" class="fn"/>
+<rect x="552.3" y="99.7" width="24.8" height="31.0" rx="3.1" class="fn-thin"/>
+<circle cx="564.7" cy="257.8" r="7.44" class="fn-thin"/>
+<circle cx="564.7" cy="233.0" r="7.44" class="fn-thin"/>
+<rect x="583.3" y="87.3" width="105.4" height="37.2" rx="0.0" class="fn"/>
+<rect x="595.7" y="93.5" width="31.0" height="24.8" rx="3.1" class="fn-thin"/>
+<circle cx="660.8" cy="105.9" r="7.44" class="fn-thin"/>
+<circle cx="636.0" cy="105.9" r="7.44" class="fn-thin"/>
+<rect x="645.3" y="282.6" width="43.4" height="43.4" rx="0.0" class="fn"/>
+<rect x="344.6" y="366.3" width="111.6" height="49.6" rx="2.48" class="fn"/>
+<rect x="360.1" y="338.4" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="360.1" y="419.0" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="415.9" y="338.4" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="415.9" y="419.0" width="24.8" height="24.8" rx="3.72" class="fn"/>
+<rect x="481.0" y="425.2" width="93.0" height="49.6" rx="4.96" class="fn"/>
+<rect x="595.7" y="347.7" width="55.8" height="68.2" rx="0.0" class="fn"/>
+<circle cx="623.6" cy="381.8" r="3.72" class="fn-thin"/>
+<line x1="595.7" y1="347.7" x2="651.5" y2="415.9" class="fn-thin"/>
+<rect x="660.8" y="350.8" width="24.8" height="12.4" rx="1.86" class="fn"/>
+<ellipse cx="673.2" cy="378.7" rx="11.16" ry="15.5" class="fn"/>
+<rect x="648.4" y="450.0" width="37.2" height="24.8" rx="1.86" class="fn"/>
+<ellipse cx="667.0" cy="462.4" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="236.1" y="502.7" width="43.4" height="186.0" rx="0.0" class="fn"/>
+<rect x="453.1" y="502.7" width="43.4" height="186.0" rx="0.0" class="fn"/>
+<rect x="236.1" y="645.3" width="260.4" height="43.4" rx="0.0" class="fn"/>
+<rect x="329.1" y="574.0" width="74.4" height="43.4" rx="3.1" class="fn"/>
+<rect x="580.2" y="505.8" width="99.2" height="124.0" rx="2.48" class="fn"/>
+<rect x="585.16" y="510.76" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<rect x="632.28" y="510.76" width="42.16" height="27.9" rx="3.1" class="fn"/>
+<line x1="580.2" y1="549.2" x2="679.4" y2="549.2" class="fn"/>
+<rect x="518.2" y="648.4" width="167.4" height="37.2" rx="0.0" class="fn"/>
+<line x1="518.2" y1="648.4" x2="685.6" y2="685.6" class="fn-thin"/>
+<line x1="518.2" y1="685.6" x2="685.6" y2="648.4" class="fn-thin"/>
+<text x="152.4" y="644.4" class="lbl" text-anchor="middle">Escalier</text>
+<text x="152.4" y="659.4" class="lbl-a" text-anchor="middle">12.3 m²</text>
+<text x="177.2" y="204.2" class="lbl" text-anchor="middle">Chambre parentale</text>
+<text x="177.2" y="219.2" class="lbl-a" text-anchor="middle">12 m²</text>
+<text x="406.6" y="204.2" class="lbl" text-anchor="middle">Patio</text>
+<text x="406.6" y="219.2" class="lbl-a" text-anchor="middle">16 m²</text>
+<text x="617.4" y="204.2" class="lbl" text-anchor="middle">Cuisine</text>
+<text x="617.4" y="219.2" class="lbl-a" text-anchor="middle">9.6 m²</text>
+<text x="406.6" y="411.9" class="lbl" text-anchor="middle">Hall · salle à manger</text>
+<text x="406.6" y="426.9" class="lbl-a" text-anchor="middle">12.9 m²</text>
+<text x="642.2" y="411.9" class="lbl" text-anchor="middle">SDB</text>
+<text x="642.2" y="426.9" class="lbl-a" text-anchor="middle">3.7 m²</text>
+<text x="366.3" y="591.7" class="lbl" text-anchor="middle">Salon marocain</text>
+<text x="366.3" y="606.7" class="lbl-a" text-anchor="middle">13.3 m²</text>
+<text x="601.9" y="591.7" class="lbl" text-anchor="middle">Chambre 2</text>
+<text x="601.9" y="606.7" class="lbl-a" text-anchor="middle">9 m²</text>
+<text x="431.4" y="733.0" class="lbl-s" text-anchor="middle">Balcon</text>
+<text x="192.7" y="381.8" class="note" text-anchor="middle">palier</text>
+<line x1="78.0" y1="43.9" x2="698.0" y2="43.9" class="dim"/>
+<line x1="78.0" y1="36.46" x2="78.0" y2="51.34" class="dim"/>
+<line x1="698.0" y1="36.46" x2="698.0" y2="51.34" class="dim"/>
+<text x="388.0" y="38.9" class="dim-t" text-anchor="middle">10 m</text>
+<line x1="43.9" y1="78.0" x2="43.9" y2="698.0" class="dim"/>
+<line x1="36.46" y1="78.0" x2="51.34" y2="78.0" class="dim"/>
+<line x1="36.46" y1="698.0" x2="51.34" y2="698.0" class="dim"/>
+<text x="38.9" y="388.0" class="dim-t" text-anchor="middle" transform="rotate(-90 38.9 388.0)">10 m</text>
+<line x1="78.0" y1="781.7" x2="226.8" y2="781.7" class="dim2"/>
+<line x1="78.0" y1="774.26" x2="78.0" y2="789.14" class="dim2"/>
+<line x1="226.8" y1="774.26" x2="226.8" y2="789.14" class="dim2"/>
+<text x="152.4" y="776.7" class="dim-t" text-anchor="middle">2.4 m</text>
+<line x1="226.8" y1="781.7" x2="505.8" y2="781.7" class="dim2"/>
+<line x1="226.8" y1="774.26" x2="226.8" y2="789.14" class="dim2"/>
+<line x1="505.8" y1="774.26" x2="505.8" y2="789.14" class="dim2"/>
+<text x="366.3" y="776.7" class="dim-t" text-anchor="middle">4.5 m</text>
+<line x1="505.8" y1="781.7" x2="698.0" y2="781.7" class="dim2"/>
+<line x1="505.8" y1="774.26" x2="505.8" y2="789.14" class="dim2"/>
+<line x1="698.0" y1="774.26" x2="698.0" y2="789.14" class="dim2"/>
+<text x="601.9" y="776.7" class="dim-t" text-anchor="middle">3.1 m</text>
+<line x1="725.9" y1="78.0" x2="725.9" y2="338.4" class="dim2"/>
+<line x1="718.46" y1="78.0" x2="733.34" y2="78.0" class="dim2"/>
+<line x1="718.46" y1="338.4" x2="733.34" y2="338.4" class="dim2"/>
+<text x="720.9" y="208.2" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 208.2)">4.2 m</text>
+<line x1="725.9" y1="338.4" x2="725.9" y2="493.4" class="dim2"/>
+<line x1="718.46" y1="338.4" x2="733.34" y2="338.4" class="dim2"/>
+<line x1="718.46" y1="493.4" x2="733.34" y2="493.4" class="dim2"/>
+<text x="720.9" y="415.9" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 415.9)">2.5 m</text>
+<line x1="725.9" y1="493.4" x2="725.9" y2="698.0" class="dim2"/>
+<line x1="718.46" y1="493.4" x2="733.34" y2="493.4" class="dim2"/>
+<line x1="718.46" y1="698.0" x2="733.34" y2="698.0" class="dim2"/>
+<text x="720.9" y="595.7" class="dim-t" text-anchor="middle" transform="rotate(-90 720.9 595.7)">3.3 m</text>
+<text x="388.0" y="794.0" class="street" text-anchor="middle">RUE</text>
+<text x="86.0" y="388.0" class="party" transform="rotate(-90 86.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="692.0" y="388.0" class="party" transform="rotate(90 692.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="388.0" y="91.0" class="party" text-anchor="middle">mitoyen</text>
+</svg>
+</div>
+    <figcaption><b>Net 60 m² + balcony 6.6 m²</b><span>Salon marocain 13.3 · chambre parentale 12.0 · chambre 2 9.0 · hall-salle à manger 12.9 · cuisine fermée 9.6 · SDB 3.7</span></figcaption>
+  </figure>
+  <p style="margin-top:14px">Plan B keeps the shell, the stair, the courtyard and the plumbing stacks of Plan A. It moves the kitchen into the courtyard-side room, closed and fitted, and deepens the middle band into the dining hall Moroccan families use daily, with a table for six and a sofa, while the salon marocain stays for guests. In the listings this reads as "salon marocain + salon européen", the formula that draws the most enquiries. Building Plan A on one floor and Plan B on another changes only partitions, not the frame.</p>
+
+  <h3 style="margin-top:32px;margin-bottom:12px">Room schedule, Plan A typical floor</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Room</th><th class="n">Clear size (m)</th><th class="n">Net m²</th><th>Daylight</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Salon marocain</td><td class="n">4.0 × 3.4</td><td class="n">13.6</td><td>Street, 3.0 m French window</td><td>U of sedari on three walls, gebs cornice, glazed screen to the kitchen</td></tr>
+        <tr><td>Chambre parentale</td><td class="n">3.0 × 4.2</td><td class="n">12.6</td><td>Courtyard, 2.2 m window</td><td>160 bed, 2.2 m wardrobe, room for a desk</td></tr>
+        <tr><td>Chambre 2</td><td class="n">3.2 × 3.4</td><td class="n">10.9</td><td>Street, 2.0 m window</td><td>Balcony access, 3.0 m wardrobe wall</td></tr>
+        <tr><td>Chambre 3</td><td class="n">2.4 × 4.2</td><td class="n">10.1</td><td>Courtyard, 1.6 m window</td><td>140 bed along the wall, 1.4 m wardrobe; child or guest room</td></tr>
+        <tr><td>Cuisine ouverte</td><td class="n">5.6 × 1.8</td><td class="n">10.1</td><td>Courtyard, 3.4 m glass wall</td><td>3.6 m counter, fridge, breakfast table; also the passage to salon and bedrooms</td></tr>
+        <tr><td>Salle de bain</td><td class="n">1.6 × 1.8</td><td class="n">2.9</td><td>Duct</td><td>Shower 90 × 90, wall-hung WC, vanity; the only WC of the apartment</td></tr>
+        <tr><td>Palier d'arrivée (shared)</td><td class="n">2.2 × 1.1</td><td class="n">—</td><td>—</td><td>Porte blindée opens from the landing into the kitchen band</td></tr>
+        <tr><td>Balcon</td><td class="n">6.6 × 1.0</td><td class="n">6.6</td><td>—</td><td>Claustra front, 1.0 m from the party line</td></tr>
+        <tr><td>Patio (shared light, private floor at ground level)</td><td class="n">4.0 × 4.0</td><td class="n">16.0</td><td>Open sky</td><td>Zellige floor, one climbing plant, wall lights</td></tr>
+      </tbody>
+      <tfoot><tr><td>Net habitable per apartment</td><td></td><td class="n">60.1</td><td colspan="2">Built private area about 71 m²; marketed surface about 84 m² including walls and share of common parts</td></tr></tfoot>
+    </table>
+  </div>
+
+  <h3 style="margin-top:32px;margin-bottom:12px">Street façade</h3>
+  <figure class="fig">
+    <div class="draw"><svg viewBox="0 0 820 981" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="e-t" class="elev">
+<title id="e-t">Façade sur rue</title>
+<line x1="44.2" y1="881.2" x2="775.8" y2="881.2" class="ground"/>
+<rect x="44.2" y="273.6" width="55.8" height="607.6" class="neigh"/>
+<rect x="720.0" y="292.2" width="55.8" height="589.0" class="neigh"/>
+<rect x="100.0" y="242.6" width="620.0" height="638.6" class="body"/>
+<rect x="100.0" y="844.0" width="620.0" height="37.2" class="plinth"/>
+<rect x="236.4" y="310.8" width="12.4" height="533.2" class="band"/>
+<rect x="658.0" y="310.8" width="12.4" height="533.2" class="band"/>
+<rect x="100.0" y="168.2" width="148.8" height="142.6" class="body"/>
+<rect x="118.6" y="205.4" width="111.6" height="31.0" class="glass"/>
+<line x1="100.0" y1="310.8" x2="720.0" y2="310.8" class="joint"/>
+<line x1="100.0" y1="242.6" x2="720.0" y2="242.6" class="edge"/>
+<line x1="100.0" y1="682.8" x2="720.0" y2="682.8" class="joint"/>
+<line x1="100.0" y1="496.8" x2="720.0" y2="496.8" class="joint"/>
+<rect x="248.8" y="671.64" width="409.2" height="11.16" class="slab"/>
+<rect x="248.8" y="606.54" width="409.2" height="65.1" class="claustra"/>
+<rect x="253.88000000000002" y="659.36" width="7.2" height="7.2" transform="rotate(45 257.48 662.96)" class="perf"/>
+<rect x="253.88000000000002" y="635.49" width="7.2" height="7.2" transform="rotate(45 257.48 639.09)" class="perf"/>
+<rect x="253.88000000000002" y="611.62" width="7.2" height="7.2" transform="rotate(45 257.48 615.22)" class="perf"/>
+<rect x="271.69" y="659.36" width="7.2" height="7.2" transform="rotate(45 275.29 662.96)" class="perf"/>
+<rect x="271.69" y="635.49" width="7.2" height="7.2" transform="rotate(45 275.29 639.09)" class="perf"/>
+<rect x="271.69" y="611.62" width="7.2" height="7.2" transform="rotate(45 275.29 615.22)" class="perf"/>
+<rect x="289.5" y="659.36" width="7.2" height="7.2" transform="rotate(45 293.1 662.96)" class="perf"/>
+<rect x="289.5" y="635.49" width="7.2" height="7.2" transform="rotate(45 293.1 639.09)" class="perf"/>
+<rect x="289.5" y="611.62" width="7.2" height="7.2" transform="rotate(45 293.1 615.22)" class="perf"/>
+<rect x="307.31" y="659.36" width="7.2" height="7.2" transform="rotate(45 310.91 662.96)" class="perf"/>
+<rect x="307.31" y="635.49" width="7.2" height="7.2" transform="rotate(45 310.91 639.09)" class="perf"/>
+<rect x="307.31" y="611.62" width="7.2" height="7.2" transform="rotate(45 310.91 615.22)" class="perf"/>
+<rect x="325.12" y="659.36" width="7.2" height="7.2" transform="rotate(45 328.72 662.96)" class="perf"/>
+<rect x="325.12" y="635.49" width="7.2" height="7.2" transform="rotate(45 328.72 639.09)" class="perf"/>
+<rect x="325.12" y="611.62" width="7.2" height="7.2" transform="rotate(45 328.72 615.22)" class="perf"/>
+<rect x="342.92999999999995" y="659.36" width="7.2" height="7.2" transform="rotate(45 346.53 662.96)" class="perf"/>
+<rect x="342.92999999999995" y="635.49" width="7.2" height="7.2" transform="rotate(45 346.53 639.09)" class="perf"/>
+<rect x="342.92999999999995" y="611.62" width="7.2" height="7.2" transform="rotate(45 346.53 615.22)" class="perf"/>
+<rect x="360.75" y="659.36" width="7.2" height="7.2" transform="rotate(45 364.35 662.96)" class="perf"/>
+<rect x="360.75" y="635.49" width="7.2" height="7.2" transform="rotate(45 364.35 639.09)" class="perf"/>
+<rect x="360.75" y="611.62" width="7.2" height="7.2" transform="rotate(45 364.35 615.22)" class="perf"/>
+<rect x="378.56" y="659.36" width="7.2" height="7.2" transform="rotate(45 382.16 662.96)" class="perf"/>
+<rect x="378.56" y="635.49" width="7.2" height="7.2" transform="rotate(45 382.16 639.09)" class="perf"/>
+<rect x="378.56" y="611.62" width="7.2" height="7.2" transform="rotate(45 382.16 615.22)" class="perf"/>
+<rect x="396.37" y="659.36" width="7.2" height="7.2" transform="rotate(45 399.97 662.96)" class="perf"/>
+<rect x="396.37" y="635.49" width="7.2" height="7.2" transform="rotate(45 399.97 639.09)" class="perf"/>
+<rect x="396.37" y="611.62" width="7.2" height="7.2" transform="rotate(45 399.97 615.22)" class="perf"/>
+<rect x="414.17999999999995" y="659.36" width="7.2" height="7.2" transform="rotate(45 417.78 662.96)" class="perf"/>
+<rect x="414.17999999999995" y="635.49" width="7.2" height="7.2" transform="rotate(45 417.78 639.09)" class="perf"/>
+<rect x="414.17999999999995" y="611.62" width="7.2" height="7.2" transform="rotate(45 417.78 615.22)" class="perf"/>
+<rect x="431.98999999999995" y="659.36" width="7.2" height="7.2" transform="rotate(45 435.59 662.96)" class="perf"/>
+<rect x="431.98999999999995" y="635.49" width="7.2" height="7.2" transform="rotate(45 435.59 639.09)" class="perf"/>
+<rect x="431.98999999999995" y="611.62" width="7.2" height="7.2" transform="rotate(45 435.59 615.22)" class="perf"/>
+<rect x="449.79999999999995" y="659.36" width="7.2" height="7.2" transform="rotate(45 453.4 662.96)" class="perf"/>
+<rect x="449.79999999999995" y="635.49" width="7.2" height="7.2" transform="rotate(45 453.4 639.09)" class="perf"/>
+<rect x="449.79999999999995" y="611.62" width="7.2" height="7.2" transform="rotate(45 453.4 615.22)" class="perf"/>
+<rect x="467.60999999999996" y="659.36" width="7.2" height="7.2" transform="rotate(45 471.21 662.96)" class="perf"/>
+<rect x="467.60999999999996" y="635.49" width="7.2" height="7.2" transform="rotate(45 471.21 639.09)" class="perf"/>
+<rect x="467.60999999999996" y="611.62" width="7.2" height="7.2" transform="rotate(45 471.21 615.22)" class="perf"/>
+<rect x="485.41999999999996" y="659.36" width="7.2" height="7.2" transform="rotate(45 489.02 662.96)" class="perf"/>
+<rect x="485.41999999999996" y="635.49" width="7.2" height="7.2" transform="rotate(45 489.02 639.09)" class="perf"/>
+<rect x="485.41999999999996" y="611.62" width="7.2" height="7.2" transform="rotate(45 489.02 615.22)" class="perf"/>
+<rect x="503.22999999999996" y="659.36" width="7.2" height="7.2" transform="rotate(45 506.83 662.96)" class="perf"/>
+<rect x="503.22999999999996" y="635.49" width="7.2" height="7.2" transform="rotate(45 506.83 639.09)" class="perf"/>
+<rect x="503.22999999999996" y="611.62" width="7.2" height="7.2" transform="rotate(45 506.83 615.22)" class="perf"/>
+<rect x="521.04" y="659.36" width="7.2" height="7.2" transform="rotate(45 524.64 662.96)" class="perf"/>
+<rect x="521.04" y="635.49" width="7.2" height="7.2" transform="rotate(45 524.64 639.09)" class="perf"/>
+<rect x="521.04" y="611.62" width="7.2" height="7.2" transform="rotate(45 524.64 615.22)" class="perf"/>
+<rect x="538.85" y="659.36" width="7.2" height="7.2" transform="rotate(45 542.45 662.96)" class="perf"/>
+<rect x="538.85" y="635.49" width="7.2" height="7.2" transform="rotate(45 542.45 639.09)" class="perf"/>
+<rect x="538.85" y="611.62" width="7.2" height="7.2" transform="rotate(45 542.45 615.22)" class="perf"/>
+<rect x="556.67" y="659.36" width="7.2" height="7.2" transform="rotate(45 560.27 662.96)" class="perf"/>
+<rect x="556.67" y="635.49" width="7.2" height="7.2" transform="rotate(45 560.27 639.09)" class="perf"/>
+<rect x="556.67" y="611.62" width="7.2" height="7.2" transform="rotate(45 560.27 615.22)" class="perf"/>
+<rect x="574.48" y="659.36" width="7.2" height="7.2" transform="rotate(45 578.08 662.96)" class="perf"/>
+<rect x="574.48" y="635.49" width="7.2" height="7.2" transform="rotate(45 578.08 639.09)" class="perf"/>
+<rect x="574.48" y="611.62" width="7.2" height="7.2" transform="rotate(45 578.08 615.22)" class="perf"/>
+<rect x="592.29" y="659.36" width="7.2" height="7.2" transform="rotate(45 595.89 662.96)" class="perf"/>
+<rect x="592.29" y="635.49" width="7.2" height="7.2" transform="rotate(45 595.89 639.09)" class="perf"/>
+<rect x="592.29" y="611.62" width="7.2" height="7.2" transform="rotate(45 595.89 615.22)" class="perf"/>
+<rect x="610.1" y="659.36" width="7.2" height="7.2" transform="rotate(45 613.7 662.96)" class="perf"/>
+<rect x="610.1" y="635.49" width="7.2" height="7.2" transform="rotate(45 613.7 639.09)" class="perf"/>
+<rect x="610.1" y="611.62" width="7.2" height="7.2" transform="rotate(45 613.7 615.22)" class="perf"/>
+<rect x="627.91" y="659.36" width="7.2" height="7.2" transform="rotate(45 631.51 662.96)" class="perf"/>
+<rect x="627.91" y="635.49" width="7.2" height="7.2" transform="rotate(45 631.51 639.09)" class="perf"/>
+<rect x="627.91" y="611.62" width="7.2" height="7.2" transform="rotate(45 631.51 615.22)" class="perf"/>
+<rect x="645.72" y="659.36" width="7.2" height="7.2" transform="rotate(45 649.32 662.96)" class="perf"/>
+<rect x="645.72" y="635.49" width="7.2" height="7.2" transform="rotate(45 649.32 639.09)" class="perf"/>
+<rect x="645.72" y="611.62" width="7.2" height="7.2" transform="rotate(45 649.32 615.22)" class="perf"/>
+<rect x="248.8" y="485.64" width="409.2" height="11.16" class="slab"/>
+<rect x="248.8" y="420.54" width="409.2" height="65.1" class="claustra"/>
+<rect x="253.88000000000002" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 257.48 476.96)" class="perf"/>
+<rect x="253.88000000000002" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 257.48 453.09)" class="perf"/>
+<rect x="253.88000000000002" y="425.62" width="7.2" height="7.2" transform="rotate(45 257.48 429.22)" class="perf"/>
+<rect x="271.69" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 275.29 476.96)" class="perf"/>
+<rect x="271.69" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 275.29 453.09)" class="perf"/>
+<rect x="271.69" y="425.62" width="7.2" height="7.2" transform="rotate(45 275.29 429.22)" class="perf"/>
+<rect x="289.5" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 293.1 476.96)" class="perf"/>
+<rect x="289.5" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 293.1 453.09)" class="perf"/>
+<rect x="289.5" y="425.62" width="7.2" height="7.2" transform="rotate(45 293.1 429.22)" class="perf"/>
+<rect x="307.31" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 310.91 476.96)" class="perf"/>
+<rect x="307.31" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 310.91 453.09)" class="perf"/>
+<rect x="307.31" y="425.62" width="7.2" height="7.2" transform="rotate(45 310.91 429.22)" class="perf"/>
+<rect x="325.12" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 328.72 476.96)" class="perf"/>
+<rect x="325.12" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 328.72 453.09)" class="perf"/>
+<rect x="325.12" y="425.62" width="7.2" height="7.2" transform="rotate(45 328.72 429.22)" class="perf"/>
+<rect x="342.92999999999995" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 346.53 476.96)" class="perf"/>
+<rect x="342.92999999999995" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 346.53 453.09)" class="perf"/>
+<rect x="342.92999999999995" y="425.62" width="7.2" height="7.2" transform="rotate(45 346.53 429.22)" class="perf"/>
+<rect x="360.75" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 364.35 476.96)" class="perf"/>
+<rect x="360.75" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 364.35 453.09)" class="perf"/>
+<rect x="360.75" y="425.62" width="7.2" height="7.2" transform="rotate(45 364.35 429.22)" class="perf"/>
+<rect x="378.56" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 382.16 476.96)" class="perf"/>
+<rect x="378.56" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 382.16 453.09)" class="perf"/>
+<rect x="378.56" y="425.62" width="7.2" height="7.2" transform="rotate(45 382.16 429.22)" class="perf"/>
+<rect x="396.37" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 399.97 476.96)" class="perf"/>
+<rect x="396.37" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 399.97 453.09)" class="perf"/>
+<rect x="396.37" y="425.62" width="7.2" height="7.2" transform="rotate(45 399.97 429.22)" class="perf"/>
+<rect x="414.17999999999995" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 417.78 476.96)" class="perf"/>
+<rect x="414.17999999999995" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 417.78 453.09)" class="perf"/>
+<rect x="414.17999999999995" y="425.62" width="7.2" height="7.2" transform="rotate(45 417.78 429.22)" class="perf"/>
+<rect x="431.98999999999995" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 435.59 476.96)" class="perf"/>
+<rect x="431.98999999999995" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 435.59 453.09)" class="perf"/>
+<rect x="431.98999999999995" y="425.62" width="7.2" height="7.2" transform="rotate(45 435.59 429.22)" class="perf"/>
+<rect x="449.79999999999995" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 453.4 476.96)" class="perf"/>
+<rect x="449.79999999999995" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 453.4 453.09)" class="perf"/>
+<rect x="449.79999999999995" y="425.62" width="7.2" height="7.2" transform="rotate(45 453.4 429.22)" class="perf"/>
+<rect x="467.60999999999996" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 471.21 476.96)" class="perf"/>
+<rect x="467.60999999999996" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 471.21 453.09)" class="perf"/>
+<rect x="467.60999999999996" y="425.62" width="7.2" height="7.2" transform="rotate(45 471.21 429.22)" class="perf"/>
+<rect x="485.41999999999996" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 489.02 476.96)" class="perf"/>
+<rect x="485.41999999999996" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 489.02 453.09)" class="perf"/>
+<rect x="485.41999999999996" y="425.62" width="7.2" height="7.2" transform="rotate(45 489.02 429.22)" class="perf"/>
+<rect x="503.22999999999996" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 506.83 476.96)" class="perf"/>
+<rect x="503.22999999999996" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 506.83 453.09)" class="perf"/>
+<rect x="503.22999999999996" y="425.62" width="7.2" height="7.2" transform="rotate(45 506.83 429.22)" class="perf"/>
+<rect x="521.04" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 524.64 476.96)" class="perf"/>
+<rect x="521.04" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 524.64 453.09)" class="perf"/>
+<rect x="521.04" y="425.62" width="7.2" height="7.2" transform="rotate(45 524.64 429.22)" class="perf"/>
+<rect x="538.85" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 542.45 476.96)" class="perf"/>
+<rect x="538.85" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 542.45 453.09)" class="perf"/>
+<rect x="538.85" y="425.62" width="7.2" height="7.2" transform="rotate(45 542.45 429.22)" class="perf"/>
+<rect x="556.67" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 560.27 476.96)" class="perf"/>
+<rect x="556.67" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 560.27 453.09)" class="perf"/>
+<rect x="556.67" y="425.62" width="7.2" height="7.2" transform="rotate(45 560.27 429.22)" class="perf"/>
+<rect x="574.48" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 578.08 476.96)" class="perf"/>
+<rect x="574.48" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 578.08 453.09)" class="perf"/>
+<rect x="574.48" y="425.62" width="7.2" height="7.2" transform="rotate(45 578.08 429.22)" class="perf"/>
+<rect x="592.29" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 595.89 476.96)" class="perf"/>
+<rect x="592.29" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 595.89 453.09)" class="perf"/>
+<rect x="592.29" y="425.62" width="7.2" height="7.2" transform="rotate(45 595.89 429.22)" class="perf"/>
+<rect x="610.1" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 613.7 476.96)" class="perf"/>
+<rect x="610.1" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 613.7 453.09)" class="perf"/>
+<rect x="610.1" y="425.62" width="7.2" height="7.2" transform="rotate(45 613.7 429.22)" class="perf"/>
+<rect x="627.91" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 631.51 476.96)" class="perf"/>
+<rect x="627.91" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 631.51 453.09)" class="perf"/>
+<rect x="627.91" y="425.62" width="7.2" height="7.2" transform="rotate(45 631.51 429.22)" class="perf"/>
+<rect x="645.72" y="473.35999999999996" width="7.2" height="7.2" transform="rotate(45 649.32 476.96)" class="perf"/>
+<rect x="645.72" y="449.48999999999995" width="7.2" height="7.2" transform="rotate(45 649.32 453.09)" class="perf"/>
+<rect x="645.72" y="425.62" width="7.2" height="7.2" transform="rotate(45 649.32 429.22)" class="perf"/>
+<rect x="174.4" y="720.0" width="74.4" height="161.2" class="door"/>
+<line x1="183.7" y1="726.2" x2="183.7" y2="875.0" class="slat"/>
+<line x1="193.0" y1="726.2" x2="193.0" y2="875.0" class="slat"/>
+<line x1="202.3" y1="726.2" x2="202.3" y2="875.0" class="slat"/>
+<line x1="211.6" y1="726.2" x2="211.6" y2="875.0" class="slat"/>
+<line x1="220.9" y1="726.2" x2="220.9" y2="875.0" class="slat"/>
+<line x1="230.2" y1="726.2" x2="230.2" y2="875.0" class="slat"/>
+<line x1="239.5" y1="726.2" x2="239.5" y2="875.0" class="slat"/>
+<rect x="286.0" y="720.0" width="186.0" height="99.2" class="frame"/>
+<rect x="289.72" y="723.72" width="178.56" height="91.76" class="glass"/>
+<line x1="348.0" y1="720.0" x2="348.0" y2="819.2" class="mullion"/>
+<line x1="410.0" y1="720.0" x2="410.0" y2="819.2" class="mullion"/>
+<rect x="546.4" y="720.0" width="124.0" height="99.2" class="frame"/>
+<rect x="550.12" y="723.72" width="116.56" height="91.76" class="glass"/>
+<line x1="608.4" y1="720.0" x2="608.4" y2="819.2" class="mullion"/>
+<rect x="131.0" y="707.6" width="43.4" height="74.4" class="claustra"/>
+<rect x="136.08" y="769.72" width="7.2" height="7.2" transform="rotate(45 139.68 773.32)" class="perf"/>
+<rect x="136.08" y="750.7099999999999" width="7.2" height="7.2" transform="rotate(45 139.68 754.31)" class="perf"/>
+<rect x="136.08" y="731.6899999999999" width="7.2" height="7.2" transform="rotate(45 139.68 735.29)" class="perf"/>
+<rect x="136.08" y="712.68" width="7.2" height="7.2" transform="rotate(45 139.68 716.28)" class="perf"/>
+<rect x="162.12" y="769.72" width="7.2" height="7.2" transform="rotate(45 165.72 773.32)" class="perf"/>
+<rect x="162.12" y="750.7099999999999" width="7.2" height="7.2" transform="rotate(45 165.72 754.31)" class="perf"/>
+<rect x="162.12" y="731.6899999999999" width="7.2" height="7.2" transform="rotate(45 165.72 735.29)" class="perf"/>
+<rect x="162.12" y="712.68" width="7.2" height="7.2" transform="rotate(45 165.72 716.28)" class="perf"/>
+<rect x="286.0" y="534.0" width="186.0" height="142.6" class="frame"/>
+<rect x="289.72" y="537.72" width="178.56" height="135.16" class="glass"/>
+<line x1="348.0" y1="534.0" x2="348.0" y2="676.6" class="mullion"/>
+<line x1="410.0" y1="534.0" x2="410.0" y2="676.6" class="mullion"/>
+<rect x="546.4" y="521.6" width="124.0" height="99.2" class="frame"/>
+<rect x="550.12" y="525.32" width="116.56" height="91.76" class="glass"/>
+<line x1="608.4" y1="521.6" x2="608.4" y2="620.8" class="mullion"/>
+<rect x="137.2" y="521.6" width="74.4" height="99.2" class="claustra"/>
+<rect x="142.28" y="608.52" width="7.2" height="7.2" transform="rotate(45 145.88 612.12)" class="perf"/>
+<rect x="142.28" y="588.06" width="7.2" height="7.2" transform="rotate(45 145.88 591.66)" class="perf"/>
+<rect x="142.28" y="567.6" width="7.2" height="7.2" transform="rotate(45 145.88 571.2)" class="perf"/>
+<rect x="142.28" y="547.14" width="7.2" height="7.2" transform="rotate(45 145.88 550.74)" class="perf"/>
+<rect x="142.28" y="526.68" width="7.2" height="7.2" transform="rotate(45 145.88 530.28)" class="perf"/>
+<rect x="161.29" y="608.52" width="7.2" height="7.2" transform="rotate(45 164.89 612.12)" class="perf"/>
+<rect x="161.29" y="588.06" width="7.2" height="7.2" transform="rotate(45 164.89 591.66)" class="perf"/>
+<rect x="161.29" y="567.6" width="7.2" height="7.2" transform="rotate(45 164.89 571.2)" class="perf"/>
+<rect x="161.29" y="547.14" width="7.2" height="7.2" transform="rotate(45 164.89 550.74)" class="perf"/>
+<rect x="161.29" y="526.68" width="7.2" height="7.2" transform="rotate(45 164.89 530.28)" class="perf"/>
+<rect x="180.31" y="608.52" width="7.2" height="7.2" transform="rotate(45 183.91 612.12)" class="perf"/>
+<rect x="180.31" y="588.06" width="7.2" height="7.2" transform="rotate(45 183.91 591.66)" class="perf"/>
+<rect x="180.31" y="567.6" width="7.2" height="7.2" transform="rotate(45 183.91 571.2)" class="perf"/>
+<rect x="180.31" y="547.14" width="7.2" height="7.2" transform="rotate(45 183.91 550.74)" class="perf"/>
+<rect x="180.31" y="526.68" width="7.2" height="7.2" transform="rotate(45 183.91 530.28)" class="perf"/>
+<rect x="199.32" y="608.52" width="7.2" height="7.2" transform="rotate(45 202.92 612.12)" class="perf"/>
+<rect x="199.32" y="588.06" width="7.2" height="7.2" transform="rotate(45 202.92 591.66)" class="perf"/>
+<rect x="199.32" y="567.6" width="7.2" height="7.2" transform="rotate(45 202.92 571.2)" class="perf"/>
+<rect x="199.32" y="547.14" width="7.2" height="7.2" transform="rotate(45 202.92 550.74)" class="perf"/>
+<rect x="199.32" y="526.68" width="7.2" height="7.2" transform="rotate(45 202.92 530.28)" class="perf"/>
+<rect x="286.0" y="348.0" width="186.0" height="142.6" class="frame"/>
+<rect x="289.72" y="351.72" width="178.56" height="135.16" class="glass"/>
+<line x1="348.0" y1="348.0" x2="348.0" y2="490.6" class="mullion"/>
+<line x1="410.0" y1="348.0" x2="410.0" y2="490.6" class="mullion"/>
+<rect x="546.4" y="335.6" width="124.0" height="99.2" class="frame"/>
+<rect x="550.12" y="339.32" width="116.56" height="91.76" class="glass"/>
+<line x1="608.4" y1="335.6" x2="608.4" y2="434.8" class="mullion"/>
+<rect x="137.2" y="335.6" width="74.4" height="99.2" class="claustra"/>
+<rect x="142.28" y="422.52" width="7.2" height="7.2" transform="rotate(45 145.88 426.12)" class="perf"/>
+<rect x="142.28" y="402.06" width="7.2" height="7.2" transform="rotate(45 145.88 405.66)" class="perf"/>
+<rect x="142.28" y="381.59999999999997" width="7.2" height="7.2" transform="rotate(45 145.88 385.2)" class="perf"/>
+<rect x="142.28" y="361.14" width="7.2" height="7.2" transform="rotate(45 145.88 364.74)" class="perf"/>
+<rect x="142.28" y="340.67999999999995" width="7.2" height="7.2" transform="rotate(45 145.88 344.28)" class="perf"/>
+<rect x="161.29" y="422.52" width="7.2" height="7.2" transform="rotate(45 164.89 426.12)" class="perf"/>
+<rect x="161.29" y="402.06" width="7.2" height="7.2" transform="rotate(45 164.89 405.66)" class="perf"/>
+<rect x="161.29" y="381.59999999999997" width="7.2" height="7.2" transform="rotate(45 164.89 385.2)" class="perf"/>
+<rect x="161.29" y="361.14" width="7.2" height="7.2" transform="rotate(45 164.89 364.74)" class="perf"/>
+<rect x="161.29" y="340.67999999999995" width="7.2" height="7.2" transform="rotate(45 164.89 344.28)" class="perf"/>
+<rect x="180.31" y="422.52" width="7.2" height="7.2" transform="rotate(45 183.91 426.12)" class="perf"/>
+<rect x="180.31" y="402.06" width="7.2" height="7.2" transform="rotate(45 183.91 405.66)" class="perf"/>
+<rect x="180.31" y="381.59999999999997" width="7.2" height="7.2" transform="rotate(45 183.91 385.2)" class="perf"/>
+<rect x="180.31" y="361.14" width="7.2" height="7.2" transform="rotate(45 183.91 364.74)" class="perf"/>
+<rect x="180.31" y="340.67999999999995" width="7.2" height="7.2" transform="rotate(45 183.91 344.28)" class="perf"/>
+<rect x="199.32" y="422.52" width="7.2" height="7.2" transform="rotate(45 202.92 426.12)" class="perf"/>
+<rect x="199.32" y="402.06" width="7.2" height="7.2" transform="rotate(45 202.92 405.66)" class="perf"/>
+<rect x="199.32" y="381.59999999999997" width="7.2" height="7.2" transform="rotate(45 202.92 385.2)" class="perf"/>
+<rect x="199.32" y="361.14" width="7.2" height="7.2" transform="rotate(45 202.92 364.74)" class="perf"/>
+<rect x="199.32" y="340.67999999999995" width="7.2" height="7.2" transform="rotate(45 202.92 344.28)" class="perf"/>
+<text x="6" y="786.0" class="lvl" text-anchor="start">RDC</text>
+<text x="6" y="798.0" class="lvl-a" text-anchor="start">Apt 1 · cour</text>
+<text x="6" y="593.8" class="lvl" text-anchor="start">1er</text>
+<text x="6" y="605.8" class="lvl-a" text-anchor="start">Apt 2</text>
+<text x="6" y="407.8" class="lvl" text-anchor="start">2e</text>
+<text x="6" y="419.8" class="lvl-a" text-anchor="start">Apt 3 · terrasse</text>
+<text x="6" y="280.7" class="lvl" text-anchor="start">Terrasse</text>
+<line x1="794.4" y1="881.2" x2="794.4" y2="242.6" class="dim"/>
+<line x1="785.1" y1="881.2" x2="803.7" y2="881.2" class="dim"/>
+<line x1="785.1" y1="242.6" x2="803.7" y2="242.6" class="dim"/>
+<text x="806.4" y="561.9" class="dim-t" transform="rotate(90 806.4 561.9)" text-anchor="middle">10.30 m à l'acrotère</text>
+<text x="410.0" y="909.2" class="street" text-anchor="middle">RUE</text>
+</svg>
+</div>
+    <figcaption><b>10.30 m to the parapet, 11.50 m with the stair bulkhead</b><span>Smooth white render, stone plinth to 0.60 m, two stone bands framing the balconies, laser-cut metal claustra as balcony fronts and on the stair windows, dark bronze aluminium, a 1.20 m cedar-and-steel street door with brass numbers.</span></figcaption>
+  </figure>
+</section>
+
+<section class="s" id="interior">
+  <div class="sec-head">
+    <span class="eyebrow">04 · Style and finishes</span>
+    <h2>Contemporary Moroccan, spent where the eye lands</h2>
+    <p>The brief is elegant, not expensive. The rule below is simple: a calm, light shell everywhere, and Moroccan craft concentrated in the four places a visitor photographs. Buyers read those four places as "haut standing" and forgive a modest budget elsewhere.</p>
+  </div>
+  <div class="board">
+    <div class="swatch"><div class="chip" style="background:#EDE7DC"></div><div class="t"><b>Limewash white</b><span>Walls, ceilings. Warm, not cream.</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#B7B1A6"></div><div class="t"><b>Tadelakt grey</b><span>Bathroom walls, one salon wall.</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#1E4C9A"></div><div class="t"><b>Bleu de Fès</b><span>Zellige accents, entrance door.</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#3E6B4E"></div><div class="t"><b>Courtyard green</b><span>Zellige in the patio, planting.</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#8A5A3C"></div><div class="t"><b>Cedar</b><span>Doors, sedari frames, hatch.</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#B8924E"></div><div class="t"><b>Brass</b><span>Handles, taps, lamps. Small doses.</span></div></div>
+  </div>
+  <div class="grid-2" style="margin-top:22px">
+    <div class="card">
+      <h3>Spend here</h3>
+      <ul>
+        <li><b>Entrance and stair.</b> Bejmat or terrazzo treads, a plastered gebs frieze at each landing, brass numbers, interphone and a solid wood or steel street door. The stair is the first thing every visitor sees and the only part all three buyers share.</li>
+        <li><b>Salon marocain.</b> A carved plaster cornice, one wall in grey tadelakt behind the sedari, a cedar-framed arch to the dining zone, large-format porcelain tiles (60 × 120) or local marble.</li>
+        <li><b>Kitchen.</b> Fitted units in matte lacquer, quartz or granite worktop, zellige splashback in one colour, the trio (hob, hood, oven) installed, and in Plan A a black-framed glazed partition that closes it off from the dining side. Buyers price a fitted kitchen far above its cost.</li>
+        <li><b>Bathrooms.</b> Italian shower with a linear drain, tadelakt or large-format tiles, a wall-hung WC, black or brass fittings, a mirror with a light. One good bathroom sells more than two average ones.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Keep simple here</h3>
+      <ul>
+        <li><b>Bedrooms.</b> Wood-look laminate or porcelain, built-in wardrobes with plain doors, one pendant. Storage is what buyers notice.</li>
+        <li><b>Ceilings.</b> A full dropped ceiling with spots only fits in coastal cities, where 2.60 m is legal; inland keep the 2.80 m and light the salon from a perimeter cove behind the cornice.</li>
+        <li><b>Joinery.</b> Aluminium double glazing in a dark bronze or anthracite finish, sliding where space is tight. The colour is what makes an ordinary window look considered. Casablanca is preparing a façade rule that imposes light colours and silver aluminium; check it before ordering.</li>
+        <li><b>Façade.</b> Smooth white render with a stone or brick plinth to 60 cm, and a metal claustra with a Moroccan geometric motif on the balcony fronts. It gives privacy, shade, and a signature that shows in the listing photo.</li>
+        <li><b>Courtyard.</b> Zellige or terracotta on the floor, one climbing plant, a wall light. It becomes the second photo of the listing.</li>
+      </ul>
+    </div>
+  </div>
+  <h3 style="margin-top:28px;margin-bottom:12px">Finishing schedule to write into the contractor's devis</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Element</th><th>Specification</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Floors, day zone</td><td>Porcelain 60 × 120 or Moroccan marble, matte, light grey-beige</td><td>Perceived quality, easy to keep, cool in summer</td></tr>
+        <tr><td>Floors, bedrooms</td><td>Laminate AC4 or wood-look porcelain</td><td>Warmth, what listings call "parquet"</td></tr>
+        <tr><td>Salon walls</td><td>Limewash white; one tadelakt wall; gebs cornice 12–15 cm</td><td>The salon photo</td></tr>
+        <tr><td>Kitchen</td><td>Fitted, quartz top, zellige splashback, gas point + hood duct; closed in Plan B, behind a glazed partition with sliding door in Plan A</td><td>Family buyers, odours contained</td></tr>
+        <tr><td>Bathroom</td><td>Shower 90 × 90 (Plan A) or 90 × 110 (Plan B), wall-hung WC, vanity with drawer, tadelakt or 60 × 120 tiles, extractor on the roof duct</td><td>Two-line item in every listing</td></tr>
+        <tr><td>Second WC</td><td>Only in the ground-floor courtyard (Plan A) if the commune accepts it; zellige half-height, small basin</td><td>Expected in an F4, not achievable inside the plan</td></tr>
+        <tr><td>Windows</td><td>Aluminium thermal break, double glazing 4/16/4, dark bronze, mosquito screens</td><td>RTCM thermal code; comfort; look</td></tr>
+        <tr><td>Doors</td><td>Porte blindée at each apartment; cedar or oak-veneer interior doors; street door 1.20 m in steel and wood</td><td>Security is a top-three question</td></tr>
+        <tr><td>Water heating</td><td>Gas point + one solar water heater per apartment on the roof</td><td>Low bills, a selling argument for MRE</td></tr>
+        <tr><td>Electrical</td><td>Individual meters, interphone, TV and fibre points in salon and master, pre-wire for split AC in salon and master</td><td>What buyers ask on the first visit</td></tr>
+        <tr><td>Roof</td><td>Waterproofing with 10-year warranty, tiled terrace, one laundry room per apartment, tank and solar zone</td><td>Étanchéité is the top-floor buyer's fear</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s" id="budget">
+  <div class="sec-head">
+    <span class="eyebrow">05 · Budget and pricing</span>
+    <h2>Where the margin comes from</h2>
+    <p>The building costs roughly the same everywhere in Morocco. The land and the selling price do not. In 2026 a moyen-standing R+2 of about 280 m² covered costs 1.3 to 1.8 million MAD to build before land, studies and contingency. Whether the three apartments then sell at 6,000 or 13,000 MAD per m² depends on the quartier, and that single number decides the project. Use the calculator with prices from sold comparables in the exact neighbourhood, not portal asking prices, which run two to three times above real transactions in the mid market.</p>
+  </div>
+  <div class="grid-2">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Cost line (excl. land)</th><th class="n">Low</th><th class="n">High</th><th>Basis, 2026</th></tr></thead>
+        <tbody>
+          <tr><td>Structure, second fix, finishes</td><td class="n">1,260,000</td><td class="n">1,820,000</td><td>4,500–6,500 MAD/m² × 280 m² covered, moyen to upper standing</td></tr>
+          <tr><td>Architect, complete mission</td><td class="n">100,000</td><td class="n">180,000</td><td>8–10% of works (6–10% for small buildings)</td></tr>
+          <tr><td>Structural engineer, soil study, control</td><td class="n">30,000</td><td class="n">80,000</td><td>BET 8–40k, étude de sol 6–15k, bureau de contrôle 1.5–2% optional</td></tr>
+          <tr><td>Permit taxes and fees</td><td class="n">10,000</td><td class="n">15,000</td><td>Construction tax 10–30 MAD/m² depending on how the commune classes the building, file fees 1–5k</td></tr>
+          <tr><td>Utility connections, three meters</td><td class="n">30,000</td><td class="n">60,000</td><td>Water, electricity, sewer; ask the distributor for its grid</td></tr>
+          <tr><td>Copropriété file and title split</td><td class="n">15,000</td><td class="n">30,000</td><td>Surveyor, règlement de copropriété, ANCFCC fees</td></tr>
+          <tr><td>Show apartment and marketing</td><td class="n">30,000</td><td class="n">60,000</td><td>Furnished salon and one bedroom, photos, 3D, listings</td></tr>
+          <tr><td>Contingency</td><td class="n">120,000</td><td class="n">200,000</td><td>8–10% of works</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total before land</td><td class="n">1,595,000</td><td class="n">2,445,000</td><td>About 5,700–8,700 MAD per covered m²</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Three price levels in one building</h3>
+      <p>Promoters price the floors differently, and so should you. Ground floors trade 10–20% under the middle floor unless they get something the others lack; top floors with a private terrace trade 15–25% above. In this design the ground floor gets the private courtyard and the top floor gets the roof terrace, which narrows the gap and lifts the average.</p>
+      <ul>
+        <li><b>Ground floor:</b> middle-floor price minus 8%. Sell it as "appartement avec cour privative", never as "RDC".</li>
+        <li><b>First floor:</b> the reference price. Make it the furnished show apartment, since it is also the easiest to visit.</li>
+        <li><b>Second floor:</b> plus 10–12% for the terrace, the light and the absence of a neighbour above.</li>
+      </ul>
+      <p class="small muted">If the middle-floor price lands just above 700,000 MAD TTC, price the ground floor under the line: it turns the hardest unit to sell into the one that comes with 70,000 MAD of state aid.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px;margin-bottom:6px">Project calculator</h3>
+  <p class="muted small" style="margin-bottom:14px">Example values shown. Replace them with your land price and with sold prices per m² from your quartier. Everything recalculates as you type; nothing is saved.</p>
+  <div class="calc">
+    <form id="calc-form" class="calc-form" autocomplete="off">
+      <label>Land price, total (MAD)<input id="c-land" type="number" min="0" step="10000" value="400000"></label>
+      <label>Build cost per covered m² (MAD)<input id="c-build" type="number" min="1000" step="100" value="4800"></label>
+      <label>Covered area, all levels (m²)<input id="c-cov" type="number" min="100" step="5" value="280"></label>
+      <label>Studies, permit, connections, split, marketing (MAD)<input id="c-soft" type="number" min="0" step="5000" value="250000"></label>
+      <label>Contingency (% of works)<input id="c-cont" type="number" min="0" max="30" step="1" value="8"></label>
+      <label>Marketed surface per apartment (m²)<input id="c-surf" type="number" min="40" step="1" value="84"></label>
+      <label>Sale price per m², middle floor (MAD)<input id="c-price" type="number" min="1000" step="100" value="9500"></label>
+      <label>Ground floor adjustment (%)<input id="c-rdc" type="number" min="-40" max="40" step="1" value="-8"></label>
+      <label>Top floor adjustment (%)<input id="c-top" type="number" min="-40" max="40" step="1" value="11"></label>
+    </form>
+    <div class="calc-out" id="calc-out" aria-live="polite">
+      <div class="tile"><span class="k">Total cost incl. land</span><span class="v num" id="o-cost">—</span></div>
+      <div class="tile"><span class="k">Revenue, three apartments</span><span class="v num" id="o-rev">—</span></div>
+      <div class="tile"><span class="k">Gross margin before tax</span><span class="v num" id="o-margin">—</span><span class="k" id="o-marginpct"></span></div>
+      <div class="tile"><span class="k">Cost per covered m²</span><span class="v num" id="o-unit">—</span></div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:14px">
+      <table>
+        <thead><tr><th>Apartment</th><th class="n">Price TTC</th><th class="n">MAD / m²</th><th>Daam Sakane</th><th class="n">Buyer's closing costs (~7%)</th></tr></thead>
+        <tbody id="o-rows"></tbody>
+      </table>
+    </div>
+    <p class="small muted" style="margin-top:10px">Tax is not included: an occasional seller pays income tax on the property profit (20% of the net gain, minimum 3% of the price), and a build-to-sell operation can be requalified as property development with 20% VAT. Settle this with a notaire and an accountant before buying the land; it can change the margin by a fifth.</p>
+  </div>
+</section>
+<style>
+.calc { background: var(--panel); border: 1px solid var(--line); padding: 18px 20px; display: grid; gap: 14px; }
+.calc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px 16px; }
+.calc-form label { display: grid; gap: 4px; font-size: .82rem; color: var(--muted); }
+.calc-form input { font: 500 1rem var(--mono); padding: 8px 10px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: var(--radius); min-width: 0; width: 100%; }
+.calc-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.tile { border: 1px solid var(--line); background: var(--bg); padding: 12px 14px; display: grid; gap: 2px; }
+.tile .k { font-size: .76rem; color: var(--muted); }
+.tile .v { font-family: var(--display); font-size: 1.45rem; }
+.tile .v.neg { color: var(--warn); }
+.tile .v.pos { color: var(--ok); }
+.pill { display: inline-block; font: 500 .74rem var(--mono); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
+.pill.ok { color: var(--ok); border-color: var(--ok); }
+.pill.no { color: var(--muted); }
+</style>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const grp = n => String(Math.round(Math.abs(n))).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const fmt = n => (n < 0 ? '−' : '') + grp(n) + ' MAD';
+  const ids = ['c-land','c-build','c-cov','c-soft','c-cont','c-surf','c-price','c-rdc','c-top'];
+  function calc() {
+    const v = {}; ids.forEach(id => v[id] = parseFloat($(id).value) || 0);
+    const works = v['c-build'] * v['c-cov'];
+    const cost = v['c-land'] + works + v['c-soft'] + works * v['c-cont'] / 100;
+    const mid = v['c-price'] * v['c-surf'];
+    const units = [
+      { name: 'Ground floor, private courtyard', p: mid * (1 + v['c-rdc'] / 100) },
+      { name: 'First floor, show apartment', p: mid },
+      { name: 'Second floor, roof terrace', p: mid * (1 + v['c-top'] / 100) },
+    ];
+    const rev = units.reduce((s, u) => s + u.p, 0);
+    const margin = rev - cost;
+    $('o-cost').textContent = fmt(cost);
+    $('o-rev').textContent = fmt(rev);
+    const m = $('o-margin'); m.textContent = fmt(margin);
+    m.className = 'v num ' + (margin < 0 ? 'neg' : 'pos');
+    $('o-marginpct').textContent = cost ? (margin / cost * 100).toFixed(1) + '% on total cost' : '';
+    $('o-unit').textContent = v['c-cov'] ? fmt((cost - v['c-land']) / v['c-cov']) : '—';
+    $('o-rows').innerHTML = units.map(u => {
+      const aid = u.p <= 300000 ? '<span class="pill ok">100 000 MAD aid</span>' : u.p <= 700000 ? '<span class="pill ok">70 000 MAD aid</span>' : '<span class="pill no">above 700 000, no aid</span>';
+      return `<tr><td>${u.name}</td><td class="n">${fmt(u.p)}</td><td class="n">${grp(u.p / v['c-surf'])}</td><td>${aid}</td><td class="n">${fmt(u.p * 0.07)}</td></tr>`;
+    }).join('');
+  }
+  ids.forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
+
+<section class="s" id="process">
+  <div class="sec-head">
+    <span class="eyebrow">06 · From land to keys</span>
+    <h2>The path that ends with three separate titles</h2>
+    <p>Selling three apartments in one building means the building must become a copropriété with one titre foncier per lot before the first deed is signed. Most delays in small Moroccan projects come from starting that paperwork after the building is finished. Start it with the permit.</p>
+  </div>
+  <ol class="steps">
+    <li><span class="when">Month 0</span><b>Check the lot before paying for it.</b> Obtain the note de renseignements urbanistiques (Agence Urbaine, 2 working days), read the lotissement cahier des charges, confirm the titre foncier is clean at the ANCFCC (Mohafadati), and confirm R+2, the courtyard rule, the balcony rule and the parking waiver in writing.</li>
+    <li><span class="when">Months 1–3</span><b>Design and permit.</b> Sign an architect registered with the Ordre (mandatory in urban communes) and a bureau d'études for the reinforced-concrete file under RPS 2011. The architect files on Rokhas.ma: plans, structural note, RTCM thermal sheet, title, cadastral plan. An R+2 under 11.50 m is a "petit projet": 15 days statutory, 2–4 months in practice. Pay the communal construction tax (10–30 MAD per m² covered) and ask the architect to keep the whole building, stair bulkhead included, under 11.50 m so it stays a "petit projet".</li>
+    <li><span class="when">Month 3</span><b>Soil study and insurance.</b> Order the étude de sol before foundations (about 6,000–15,000 MAD). Since 30 December 2024 professional builders must carry all-risks site and ten-year liability cover; ask your contractor for both even if the threshold spares a small R+2.</li>
+    <li><span class="when">Months 4–13</span><b>Build.</b> Ten to twelve months is realistic for structure, second fix and finishes on three apartments. Post the site board, keep the site log (loi 66-12), and never enclose the courtyard or add a level: the commune inspects against the approved plans and an infraction blocks the permis d'habiter.</li>
+    <li><span class="when">Months 8–12</span><b>Prepare the copropriété while walls go up.</b> A surveyor (IGT) draws the division plan and the règlement de copropriété under loi 18-00 from the approved plans. Have the notaire review both. Individual water and electricity meters per apartment are requested from the distributor now.</li>
+    <li><span class="when">Months 13–16</span><b>Permis d'habiter.</b> File the déclaration d'achèvement with the architect's attestation of conformity. Thirty days by law, one to six months in practice depending on the commune. Without it there is no notarial sale, no bank loan and no Daam Sakane eligibility.</li>
+    <li><span class="when">Months 14–17</span><b>Split the title.</b> The Conservation Foncière registers the règlement de copropriété and creates one titre foncier per apartment with its share of common parts. Only then can a buyer's bank register a mortgage on "their" apartment.</li>
+    <li><span class="when">Months 12–18</span><b>Sell.</b> Marketing can start earlier (see the sales plan), but reservation contracts signed before completion fall under the off-plan law (VEFA, loi 107-12): a notarised preliminary contract, a bank guarantee for deposits and staged payments. Many small builders wait for the permis d'habiter and sell finished, which is simpler and what most first-time buyers prefer.</li>
+  </ol>
+</section>
+
+<section class="s" id="sales">
+  <div class="sec-head">
+    <span class="eyebrow">07 · Selling fast</span>
+    <h2>A plan to sell three apartments in one season</h2>
+    <p>A well-priced new apartment in Morocco sells in two to six months; an over-priced one sits for a year or more, and the national average is about eight months. Speed comes from four decisions made before the first listing goes online: the price, the paperwork, the show apartment, and the calendar.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1 · Price from sold comparables, then under the aid line</h3>
+      <p>Take five to ten recent sales of new three-bedroom apartments within a kilometre, from a notaire, a bank appraiser or the Yakeey and Agenz referentials, and price the first floor at their median per m². Do not price from Mubawab asking prices. Where the result lands within 10% of 700,000 MAD TTC, pull the ground floor under it so that unit carries the 70,000 MAD Daam Sakane aid. A price that a bank's appraiser confirms is a price that closes.</p>
+    </div>
+    <div class="card">
+      <h3>2 · Paperwork before marketing</h3>
+      <p>List only when you can hand a buyer three documents on the first visit: the permis d'habiter, the individual titre foncier of the apartment, and a bank pre-agreement letter from one or two banks that have already appraised the building. Buyers who can borrow sign; buyers who must wait for your paperwork keep visiting other projects.</p>
+    </div>
+    <div class="card">
+      <h3>3 · One furnished show apartment</h3>
+      <p>Furnish the first floor: the salon marocain with sedari and a lantern, the dining table, the master bedroom, plants in the courtyard. Budget 30,000–50,000 MAD, sold with the unit or moved to the next. Photograph it at dusk with lights on, shoot a 60-second vertical walkthrough, and put both on every listing. Visits convert on the salon and the bathroom, so those two must be finished to the last detail.</p>
+    </div>
+    <div class="card">
+      <h3>4 · Launch in spring, close in summer</h3>
+      <p>Purchase demand peaks in April–May and again in August, when 4.6 million Moroccans living abroad visit. Plan the permis d'habiter for February, list right after Eid al-Fitr (Ramadan 2027 ends around 9 March), and hold weekend open days in July and August for MRE families. Avoid a first launch between October and January.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:30px;margin-bottom:12px">Channels, in the order they bring serious visitors</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Channel</th><th>What to do</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Mubawab, Avito Immobilier, Sarouty, Yakeey</td><td>One listing per apartment, first photo = furnished salon, second = courtyard, third = floor plan with areas. Title carries the three magic words: titre foncier, permis d'habiter, éligible Daam Sakane. Refresh weekly; boost during the two demand peaks.</td><td>Free to a few hundred MAD per boost</td></tr>
+        <tr><td>Two local agencies plus the neighbourhood samsar</td><td>Non-exclusive mandate, same price sheet for everyone so the market sees one price. Standard commission is 2.5% from each side; pay it gladly for a signed buyer.</td><td>2.5% of price on success</td></tr>
+        <tr><td>Bank partnerships</td><td>Ask two banks (for example CIH, Attijariwafa, BCP, Bank of Africa or a participative bank for Mourabaha) to appraise the building once and pre-approve buyers. Advertise "crédit bancaire possible" and, if you register as promoter, "Daam Sakane".</td><td>Free</td></tr>
+        <tr><td>Facebook groups, Instagram and TikTok</td><td>Groups by city and by MRE community, one video walkthrough, one post per week in French and Darija, WhatsApp number in every post. This is where MRE buyers in France and Belgium first see the project.</td><td>Free to 2,000 MAD of boosts</td></tr>
+        <tr><td>Closing levers, kept in reserve</td><td>Buyers pay 6–8% of the price in registration, land-registry and notaire fees in cash on top of their down payment. "Frais de notaire offerts" on the last unit costs you about 1% and closes more sales than a price cut. Mention "financement Mourabaha possible" for buyers who refuse interest. If one unit still sits after the summer, Yakeey's instant-offer service with Umnia Bank buys eligible apartments within days, at a discount.</td><td>1–3% of one unit</td></tr>
+        <tr><td>Site signage</td><td>A clean banner on the façade from the day the render exists: "3 appartements de 3 chambres, livraison [mois], titre foncier", with a WhatsApp number. Neighbours and their relatives are the cheapest buyers to reach.</td><td>500–1,500 MAD</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2" style="margin-top:22px">
+    <div class="card">
+      <h3>Two decisions to settle with a notaire before buying the land</h3>
+      <ul>
+        <li><b>Promoter or private seller.</b> The state aid is paid only when the seller is registered as a promoter on the Daam Sakane platform; sales by private individuals are described as excluded. Registering, possibly through a small company, opens the aid to your buyers but brings VAT and professional income tax on the operation. Selling as a private individual keeps the property-profit tax (20% of the gain, minimum 3% of the price) but forfeits the aid argument and still risks requalification as a developer. Get a written answer for your case.</li>
+        <li><b>Sell finished or off-plan.</b> Off-plan sales fall under the VEFA law and need a bank guarantee that individuals rarely obtain, so deposits stay locked with the notaire. For three units, sell finished, but collect names from the day the structure is up. A 2024 reform requires promises of sale on titled property to be notarised, so never take a cash deposit against a private paper: route every reservation through the notaire.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The listing text, ready to paste</h3>
+      <div class="copybox" id="listing-copy"><button type="button" id="copy-btn" aria-label="Copy the listing text">Copier</button>Appartement neuf 3 chambres, 84 m² (60 m² habitables), salon marocain, patio de 16 m² — titre foncier individuel, permis d'habiter
+
+Dans un petit immeuble R+2 de trois appartements seulement (un par étage), appartement neuf de 3 chambres au [1er / 2e] étage, livré fini, jamais habité.
+
+• Salon marocain de 13,6 m² sur façade avec balcon, cuisine de 10 m² vitrée sur le patio
+• 3 chambres dont une chambre parentale de 12,6 m², placards intégrés
+• Cuisine équipée (plan de travail quartz, crédence zellige, trio installé), verrière atelier
+• Salle de bain avec douche italienne et WC suspendu
+• Patio de lumière de 16 m² : toutes les pièces sont éclairées naturellement, aucun vis-à-vis
+• [Balcon sur rue / Terrasse privative sur le toit avec buanderie]
+• Double vitrage aluminium, porte blindée, interphone, compteurs individuels, chauffe-eau solaire
+• Finitions haut standing : grès cérame 60×120, tadelakt, plâtre sculpté, menuiserie cèdre
+
+Prix : [690 000] DH TTC [— éligible à l'aide directe au logement Daam Sakane (70 000 DH pour les primo-accédants, résidents et MRE), uniquement si vous êtes inscrit comme promoteur sur la plateforme].
+Titre foncier individuel et permis d'habiter disponibles : crédit bancaire possible, acte chez le notaire sous 30 jours.
+Visites tous les jours, appartement témoin meublé au 1er étage. WhatsApp : [numéro]</div>
+      <p class="small muted">Replace the bracketed values with the final areas and price. Keep the Daam Sakane line only once your registration as seller on the programme is confirmed.</p>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  const btn = document.getElementById('copy-btn');
+  const box = document.getElementById('listing-copy');
+  if (!btn || !box) return;
+  btn.addEventListener('click', function () {
+    const text = box.innerText.replace(/^Copier\s*/, '').trim();
+    const done = () => { btn.textContent = 'Copié'; setTimeout(() => btn.textContent = 'Copier', 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(() => { selectAll(); });
+    } else { selectAll(); }
+    function selectAll() {
+      const r = document.createRange(); r.selectNodeContents(box); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Sélectionné'; setTimeout(() => btn.textContent = 'Copier', 1600);
+    }
+  });
+})();
+</script>
+
+<section class="s" id="sources">
+  <div class="sec-head">
+    <span class="eyebrow">Sources and limits</span>
+    <h2>What this dossier rests on</h2>
+    <p>Figures come from Moroccan official texts, the 2025–2026 market reports and 2026 practitioner guides listed below, gathered on 29 September 2026. Several official PDFs could not be opened directly and were read through search excerpts, so treat every regulatory number as "typical" until the Agence Urbaine confirms it for the parcel. Design dimensions are working assumptions for the architect who signs the permit file, not a substitute for that file.</p>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h4 style="margin-bottom:8px">Rules and procedure</h4>
+      <ul class="sources">
+        <li>Loi 12-90 (urbanisme), art. 49, 50, 55; loi 25-90 (lotissements); loi 66-12 (contrôle des infractions).</li>
+        <li>Décret 2-64-445 (zones d'habitat économique): room minimums, courtyards, stair widths, ceiling heights.</li>
+        <li>Décret 2-18-577 (RGC, 2019) and arrêté 337-20: permit file, "petits projets" ≤ 11.50 m; arrêté 1839.23 (2023) on deadlines; Rokhas.ma.</li>
+        <li>Règlements d'aménagement of AUC Casablanca (Ouled Saleh E2/E3, patio manual), AUST (courtyards 16 m² / 4 m, terraces, bulkheads), Taza and Salé (balconies), Fès Hamria (E2 sector).</li>
+        <li>RPS 2000 v2011 (décret 2-12-682); RTCM (décret 2-13-874); loi 59-13 (construction insurance); loi 47-06 (taxe sur les opérations de construction).</li>
+        <li>Loi 18-00 as amended (copropriété), ANCFCC norme 03/2019 (dossier technique); loi 39-08 (droits réels, murs mitoyens); loi 107-12 / 44-00 (VEFA).</li>
+        <li>Code général des impôts: art. 61–65 (profits fonciers), art. 89 (promoteur immobilier), art. 133 (enregistrement).</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="margin-bottom:8px">Market and buyers</h4>
+      <ul class="sources">
+        <li>Mubawab, Bilan 2025 (January 2026) via Challenge, Le Matin and Aujourd'hui le Maroc; Mubawab retrospective January–April 2024.</li>
+        <li>HCP, RGPH 2024: household size, tenure, dwelling types.</li>
+        <li>Bank Al-Maghrib / ANCFCC, IPAI Q1–Q2 2026; BAM lending-rate survey Q2 2026; Médias24, mortgage rates H1 2026 (Afdal data).</li>
+        <li>Daam Sakane: décret 2-23-350, daamsakane.ma, agenz.ma guide, Médias24 (June 2026 beneficiaries), Hespress on PLF 2026.</li>
+        <li>Yakeey / Umnia Bank (average time to sell, December 2025); Sarouty and Mubawab blogs (floor-level pricing); Nourreska buyer survey.</li>
+        <li>Construction costs 2026: lechantier.ma, bati.ma, constructionestimating.ma guides; CNOA fee scale references; material price lists (cement, rebar) May–July 2026.</li>
+        <li>Design references: Moroccan decor and craft suppliers (zellige, tadelakt, gebs, claustra), promoter listings on Yakeey and immobilier-neuf portals.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot">
+    <span>Prepared for an owner-builder planning three apartments on a 100 m² lot. All prices in Moroccan dirhams (MAD). Areas on the plans are net floor areas inside finished walls; marketed surfaces in Morocco usually include walls and a share of common parts, so the same apartment lists at about 84 m².</span>
+    <span>Verify with: your Agence Urbaine (note de renseignements), a notaire (copropriété, taxes, Daam Sakane status), an architect registered with the Ordre (permit file), and two banks (appraisal and buyer financing).</span>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function () {
+  // highlight the section in view in the rail
+  const links = Array.from(document.querySelectorAll('.rail a'));
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const secs = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !secs.length) return;
+  let current = null;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) current = e.target.id; });
+    links.forEach(a => a.removeAttribute('aria-current'));
+    const a = map.get(current); if (a) a.setAttribute('aria-current', 'true');
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  secs.forEach(s => io.observe(s));
+})();
+</script>

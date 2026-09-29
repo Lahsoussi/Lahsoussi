@@ -1,0 +1,116 @@
+<svg viewBox="0 0 776 786" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="roof-title" class="plan">
+<defs><pattern id="roof-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" class="hatch"/></pattern></defs>
+<title id="roof-title">Terrasse · buanderies, réservoirs, sortie d'escalier</title>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="plot"/>
+<rect x="84.2" y="357.0" width="136.4" height="334.8" class="room room-stair" style="fill:var(--pl-stair)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:var(--pl-patio)"/>
+<rect x="282.6" y="84.2" width="248.0" height="260.4" class="room room-patio" style="fill:none" fill="url(#roof-hatch)"/>
+<rect x="84.2" y="84.2" width="186.0" height="124.0" class="room room-tech" style="fill:var(--pl-hall)"/>
+<rect x="84.2" y="220.6" width="186.0" height="124.0" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="543.0" y="84.2" width="68.2" height="260.4" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="623.6" y="84.2" width="68.2" height="260.4" class="room room-storage" style="fill:var(--pl-hall)"/>
+<rect x="233.0" y="357.0" width="458.8" height="111.6" class="room room-terrace" style="fill:var(--pl-balcony)"/>
+<rect x="233.0" y="481.0" width="458.8" height="210.8" class="room room-terrace" style="fill:var(--pl-balcony)"/>
+<rect x="78.0" y="350.8" width="148.8" height="347.2" class="wall"/>
+<rect x="276.4" y="78.0" width="260.4" height="272.8" class="wall"/>
+<rect x="78.0" y="78.0" width="198.4" height="136.4" class="wall"/>
+<rect x="78.0" y="214.4" width="198.4" height="136.4" class="wall"/>
+<rect x="536.8" y="78.0" width="80.6" height="272.8" class="wall"/>
+<rect x="617.4" y="78.0" width="80.6" height="272.8" class="wall"/>
+<rect x="226.8" y="350.8" width="471.2" height="124.0" class="wall"/>
+<rect x="226.8" y="474.8" width="471.2" height="223.2" class="wall"/>
+<rect x="78.0" y="78.0" width="620.0" height="620.0" class="wall-outer"/>
+<rect x="363.2" y="466.12" width="186.0" height="17.36" class="gap"/>
+<line x1="363.2" y1="466.12" x2="363.2" y2="483.48" class="wall-thin"/>
+<line x1="549.2" y1="466.12" x2="549.2" y2="483.48" class="wall-thin"/>
+<rect x="218.12" y="363.2" width="17.36" height="55.8" class="gap"/>
+<line x1="226.8" y1="419.0" x2="282.6" y2="419.0" class="leaf"/>
+<path d="M282.6 419.0 A55.8 55.8 0 0 1 226.8 363.2" class="arc"/>
+<rect x="226.8" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="276.4" y1="350.8" x2="276.4" y2="301.2" class="leaf"/>
+<path d="M276.4 301.2 A49.6 49.6 0 0 1 226.8 350.8" class="arc"/>
+<rect x="543.0" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="543.0" y1="350.8" x2="543.0" y2="301.2" class="leaf"/>
+<path d="M543.0 301.2 A49.6 49.6 0 0 0 592.6 350.8" class="arc"/>
+<rect x="623.6" y="342.12" width="49.6" height="17.36" class="gap"/>
+<line x1="623.6" y1="350.8" x2="623.6" y2="301.2" class="leaf"/>
+<path d="M623.6 301.2 A49.6 49.6 0 0 0 673.2 350.8" class="arc"/>
+<line x1="84.2" y1="691.8" x2="152.4" y2="691.8" class="st"/>
+<line x1="84.2" y1="675.14" x2="152.4" y2="675.14" class="st"/>
+<line x1="84.2" y1="658.48" x2="152.4" y2="658.48" class="st"/>
+<line x1="84.2" y1="641.81" x2="152.4" y2="641.81" class="st"/>
+<line x1="84.2" y1="625.15" x2="152.4" y2="625.15" class="st"/>
+<line x1="84.2" y1="608.49" x2="152.4" y2="608.49" class="st"/>
+<line x1="84.2" y1="591.82" x2="152.4" y2="591.82" class="st"/>
+<line x1="84.2" y1="575.16" x2="152.4" y2="575.16" class="st"/>
+<line x1="84.2" y1="558.5" x2="152.4" y2="558.5" class="st"/>
+<line x1="84.2" y1="541.84" x2="152.4" y2="541.84" class="st"/>
+<line x1="84.2" y1="525.17" x2="152.4" y2="525.17" class="st"/>
+<line x1="84.2" y1="508.51" x2="152.4" y2="508.51" class="st"/>
+<line x1="84.2" y1="491.85" x2="152.4" y2="491.85" class="st"/>
+<line x1="84.2" y1="475.19" x2="152.4" y2="475.19" class="st"/>
+<line x1="84.2" y1="458.52" x2="152.4" y2="458.52" class="st"/>
+<line x1="84.2" y1="441.86" x2="152.4" y2="441.86" class="st"/>
+<line x1="84.2" y1="425.2" x2="152.4" y2="425.2" class="st"/>
+<line x1="152.4" y1="425.2" x2="152.4" y2="691.8" class="st-core"/>
+<line x1="84.2" y1="425.2" x2="220.6" y2="425.2" class="st"/>
+<line x1="186.5" y1="425.2" x2="186.5" y2="679.4" class="arc"/>
+<path d="M118.3 676.3 L118.3 434.5" class="st-arrow"/>
+<circle cx="118.3" cy="676.3" r="4.34" class="st-dot"/>
+<polygon points="110.86,450.0 125.74,450.0 118.3,431.4" class="st-head"/>
+<rect x="90.4" y="226.8" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="109.0" cy="245.4" r="12.4" class="fn-thin"/>
+<rect x="140.0" y="226.8" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="158.6" cy="240.75" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="546.1" y="90.4" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="564.7" cy="109.0" r="12.4" class="fn-thin"/>
+<rect x="546.1" y="140.0" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="564.7" cy="153.95" rx="11.16" ry="8.06" class="fn-thin"/>
+<rect x="626.7" y="90.4" width="37.2" height="37.2" rx="0.0" class="fn"/>
+<circle cx="645.3" cy="109.0" r="12.4" class="fn-thin"/>
+<rect x="626.7" y="140.0" width="37.2" height="27.9" rx="1.86" class="fn"/>
+<ellipse cx="645.3" cy="153.95" rx="11.16" ry="8.06" class="fn-thin"/>
+<text x="152.4" y="644.4" class="lbl" text-anchor="middle">Sortie escalier</text>
+<text x="152.4" y="659.4" class="lbl-a" text-anchor="middle">11.9 m²</text>
+<text x="406.6" y="218.4" class="lbl" text-anchor="middle">Vide sur patio</text>
+<text x="177.2" y="142.2" class="lbl" text-anchor="middle">Réservoirs · solaire</text>
+<text x="177.2" y="157.2" class="lbl-a" text-anchor="middle">6 m²</text>
+<text x="177.2" y="278.6" class="lbl" text-anchor="middle">Buanderie apt 3</text>
+<text x="177.2" y="293.6" class="lbl-a" text-anchor="middle">6 m²</text>
+<text x="577.1" y="210.4" class="lbl-s" text-anchor="middle">Buand. apt 1</text>
+<text x="577.1" y="225.4" class="lbl-s-a" text-anchor="middle">4.6 m²</text>
+<text x="657.7" y="210.4" class="lbl-s" text-anchor="middle">Buand. apt 2</text>
+<text x="657.7" y="225.4" class="lbl-s-a" text-anchor="middle">4.6 m²</text>
+<text x="462.4" y="408.8" class="lbl" text-anchor="middle">Terrasse commune</text>
+<text x="462.4" y="423.8" class="lbl-a" text-anchor="middle">13.3 m²</text>
+<text x="462.4" y="582.4" class="lbl" text-anchor="middle">Terrasse privative apt 3</text>
+<text x="462.4" y="597.4" class="lbl-a" text-anchor="middle">25.2 m²</text>
+<text x="406.6" y="226.8" class="note" text-anchor="middle">garde-corps 1,10 m</text>
+<text x="462.4" y="673.2" class="note" text-anchor="middle">acrotère 1,10 m sur rue</text>
+<text x="462.4" y="605.0" class="note" text-anchor="middle">25 m² réservés à l'appartement du 2e</text>
+<text x="177.2" y="152.4" class="note" text-anchor="middle">accès par la buanderie 3</text>
+<line x1="78.0" y1="43.9" x2="698.0" y2="43.9" class="dim"/>
+<line x1="78.0" y1="36.46" x2="78.0" y2="51.34" class="dim"/>
+<line x1="698.0" y1="36.46" x2="698.0" y2="51.34" class="dim"/>
+<text x="388.0" y="38.9" class="dim-t" text-anchor="middle">10 m</text>
+<line x1="43.9" y1="78.0" x2="43.9" y2="698.0" class="dim"/>
+<line x1="36.46" y1="78.0" x2="51.34" y2="78.0" class="dim"/>
+<line x1="36.46" y1="698.0" x2="51.34" y2="698.0" class="dim"/>
+<text x="38.9" y="388.0" class="dim-t" text-anchor="middle" transform="rotate(-90 38.9 388.0)">10 m</text>
+<line x1="78.0" y1="59.4" x2="276.4" y2="59.4" class="dim2"/>
+<line x1="78.0" y1="51.96" x2="78.0" y2="66.84" class="dim2"/>
+<line x1="276.4" y1="51.96" x2="276.4" y2="66.84" class="dim2"/>
+<text x="177.2" y="54.4" class="dim-t" text-anchor="middle">3.2 m</text>
+<line x1="276.4" y1="59.4" x2="536.8" y2="59.4" class="dim2"/>
+<line x1="276.4" y1="51.96" x2="276.4" y2="66.84" class="dim2"/>
+<line x1="536.8" y1="51.96" x2="536.8" y2="66.84" class="dim2"/>
+<text x="406.6" y="54.4" class="dim-t" text-anchor="middle">4.2 m</text>
+<line x1="536.8" y1="59.4" x2="698.0" y2="59.4" class="dim2"/>
+<line x1="536.8" y1="51.96" x2="536.8" y2="66.84" class="dim2"/>
+<line x1="698.0" y1="51.96" x2="698.0" y2="66.84" class="dim2"/>
+<text x="617.4" y="54.4" class="dim-t" text-anchor="middle">2.6 m</text>
+<text x="388.0" y="732.0" class="street" text-anchor="middle">RUE</text>
+<text x="86.0" y="388.0" class="party" transform="rotate(-90 86.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="692.0" y="388.0" class="party" transform="rotate(90 692.0 388.0)" text-anchor="middle">mitoyen</text>
+<text x="388.0" y="91.0" class="party" text-anchor="middle">mitoyen</text>
+</svg>
